@@ -28,14 +28,6 @@ $Id: README,v 1.19 2004/03/16 23:38:31 pcharles Exp $
     jpcap is licensed under the Mozilla Public License. See docs/MPL-1.1.txt.
 
 
-  Passive Packet Capture vs. Active Packet Injection
-
-    jpcap is passive capture mechanism. If you are interested in creating 
-    and injecting arbitrary packets into a network, check out the sister 
-    project 'jpwrite' at http://www.sf.net/projects/jpwrite. Together, 
-    jpcap and jpwrite are a powerful combination.
-
-
   Running the Samples
 
     If you have installed from RPM and are looking to run the capture tool,
@@ -93,23 +85,25 @@ $Id: README,v 1.19 2004/03/16 23:38:31 pcharles Exp $
     see docs/BUILD.[platform].
 
     Additional information can be found on sourceforge.net, where 
-    development is hosted.
+    the project was actively developed since 2001.
 
-      jpcap -- http://www.sf.net/projects/jpcap
+      http://www.sf.net/projects/jpcap
+
+    More recent development, more active development is occurring on github:
+
+      http://www.github.com/jpcap
 
 
   Contributing
 
     If you are using jpcap and have made enhancements or bug fixes to the 
-    core capture library, please contribute them back to the master source 
-    pool. 
+    core capture library, please contribute them.
 
-    You can contribute by posting a message to the discussion forums at 
-    http://www.sf.net/projects/jpcap, or by emailing the project administrator
-    directly via pcharles at users.sourceforge.net.
+    You can contribute by forking the project and sending a pull request
+    to http://www.github.com/jpcap.
 
     If you've developed an application using jpcap, we're interested in 
-    hearing about it.
+    hearing about it at jpcapadmin at ultrametrics dot net.
 
     Happy Hacking!
 
