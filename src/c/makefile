@@ -22,7 +22,7 @@ ifeq ($(OSFLAVOR), UNIX)
 	LIBS = -lnsl /usr/lib/libpcap.a
 else
 ifeq ($(OSFLAVOR), DARWIN)
-	LIBS = /usr/lib/libpcap.a
+	LIBS = /usr/lib/libpcap.A.dylib
 else
 	LIBS = -L ${WINPCAP_HOME}/Lib -lwpcap
 endif

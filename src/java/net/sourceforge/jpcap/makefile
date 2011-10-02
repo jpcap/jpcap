@@ -2,7 +2,7 @@
 #
 #   package net.sourceforge.jpcap
 #
-PKG_VERSION = 0.01.17
+PKG_VERSION = 0.01.18
 PKG_TOP = net.sourceforge.jpcap
 REL = ../../..
 
