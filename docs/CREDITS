@@ -83,15 +83,12 @@ $Id: CREDITS,v 1.18 2004/09/29 20:30:51 pcharles Exp $
   Contributing
 
     If you are using jpcap and have made enhancements or bug fixes to the 
-    core capture library, please contribute them back to the master source 
-    pool. 
+    core capture library, please contribute them.
 
-    You can contribute by posting a message to the discussion forums at 
-    http://www.sf.net/projects/jpcap, or by emailing the project administrator
-    directly to pcharles at users.sourceforge.net.
+    You can contribute by forking the project and sending a pull request
+    to http://www.github.com/jpcap.
 
     If you've developed an application using jpcap, we're interested in 
-    hearing about it.
+    hearing about it at jpcapadmin at ultrametrics dot net.
 
     Happy Hacking!
-
