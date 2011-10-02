@@ -1,0 +1,74 @@
+# $Id: request.txt,v 1.2 2001/05/27 21:16:48 pcharles Exp $
+FTP Request
+
+00 00 00 00 00 00 00 00 00 00 00 00 08 00 45 00 
+00 3c 00 58 40 00 40 06 3c 62 7f 00 00 01 7f 00 
+00 01 04 02 00 15 f0 94 69 f9 00 00 00 00 a0 02 
+79 60 69 5a 00 00 02 04 0f 2c 04 02 08 0a 00 06 
+ff 26 00 00 00 00 01 03 03 00
+
+00 00 00 00 00 00 00 00 00 00 00 00 08 00 45 00 
+00 28 00 59 00 00 ff 06 bd 74 7f 00 00 01 7f 00 
+00 01 00 15 04 02 00 00 00 00 f0 94 69 fa 50 14 
+00 00 53 28 00 00
+
+
+FTP Request decoded..
+
+                         link level ethernet header
+00 00 00 00 00 00          MAC destination address
+00 00 00 00 00 00          MAC source address
+08 00                      ethernet type field (0x800 - ip datagram)
+                         ip header
+45                         header length and version (0x4 - IPv4, 0x5 - len)
+00                         type of service
+00 3c                      total length minus eth header (0x3c - 60 bytes)
+00 58                      identification, unique id of this datagram
+40 00                      3-bit flags (0x2), 13-bit fragment offset (0x000)
+40                         time to live (TTL)
+06                         protocol (0x06 - TCP)
+3c 62                      header checksum
+7f 00 00 01                source IP address (- 127.0.0.1)
+7f 00 00 01                destination IP address (- 127.0.0.1)
+                         tcp header
+04 02                      source port number (- 66?)
+00 15                      destination port number (0x15 - 21, FTP service)
+f0 94 69 f9                sequence number
+00 00 00 00                acknowledgment number
+a                          4-bit header length
+ 0 02                      6-bits reserved, urg, ack, psh, rst, syn, fin
+79 60                      window size
+69 5a                      tcp checksum
+00 00                      urgent pointer
+                         tcp options, data
+02 04 0f 2c                ?
+04 02 08 0a                ?
+00 06 ff 26                ?
+00 00 00 00                ?
+01 03 03 00                ?
+
+                         link level ethernet header
+00 00 00 00 00 00          MAC destination address
+00 00 00 00 00 00          MAC source address
+08 00                      ethernet type field (0x800 - ip datagram)
+                         ip header
+45                         header length and version (0x4 - IPv4, 0x5 - len)
+00                         type of service
+00 28                      total length minus eth header (0x28 - 40 bytes)
+00 59                      identification, unique id of this datagram
+00 00                      3-bit flags (0x0), 13-bit fragment offset (0x000)
+ff                         time to live (TTL)
+06                         protocol (0x06 - TCP)
+bd 74                      header checksum
+7f 00 00 01                source IP address (- 127.0.0.1)
+7f 00 00 01                destination IP address (- 127.0.0.1)
+                         tcp header
+00 15                      source port number (0x15 - 21, FTP service)
+04 02                      destination port number (- 66?)
+00 00 00 00                sequence number
+f0 94 69 fa                acknowledgement number
+5                          4-bit header length
+ 0 14                      6-bits reserved, urg, ack, psh, rst, syn, fin
+00 00                      window size
+53 28                      tcp checksum
+00 00                      urgent pointer

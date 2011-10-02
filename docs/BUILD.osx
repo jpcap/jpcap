@@ -1,0 +1,77 @@
+$Id: BUILD.osx,v 1.7 2004/03/17 17:21:06 pcharles Exp $
+
+             net.sourceforge.jpcap build information - OS X
+
+
+
+  Build Procedure -- using make
+
+    0. These instructions are only relevant for building jpcap on Mac
+       OS X, via a .tar.gz or public CVS distribution.
+
+    1. Before you build jpcap you must install the following:
+         o the most recent Developer Tools, as released by Apple.
+           (developer.apple.com)
+         o the most recent versions of Java, as released by Apple, including:
+             - Java 1.4.2
+             - Java 1.4.2 JDK (very important)
+
+    2. The script scripts/env_jpcap is an example environment setup script.
+       You will likely need to modify the PROJECT_HOME variable to reflect
+       the location where you unarchived the jpcap distribution.
+        o In a terminal window, run the command 
+            '. ~/path/to/jpcap/scripts/env_jpcap'
+          (without the quotes) to setup your environment
+
+    3. Run 'make' in the top-level directory of the jpcap tree 
+       to build the project.
+
+    4. To test your build, run the command 'sudo make test' in the directory:
+         path/to/jpcap/src/java/net/sourceforge/jpcap/capture 
+
+
+  Build Procedure -- using ANT
+
+    0. These instructions are only relevant for building jpcap on Mac
+       OS X, via a .tar.gz or public CVS distribution.
+
+    1. Before you build jpcap you must install the following:
+        o fink (fink.sourceforge.net)
+        o ant (using fink)
+        o the most recent Developer Tools, as released by Apple.
+            (see developer.apple.com)
+        o the most recent versions of Java, as released by Apple, including:
+            - Java 1.4.2
+            - Java 1.4.2 JDK (very important)
+
+    2. The script scripts/env_jpcap is an example environment setup script.
+       It is meant to be cross-platform.  An OS X-only environment setup 
+       would look something like this:
+
+         export CLASSPATH=path/to/jpcap/jars/jpcap.jar
+         export DYLD_LIBRARY_PATH=path/to/jpcap/lib
+
+
+
+  NOTE:
+
+    While the jpcap packet capture API, networking classes and all 
+    tutorials work fine on Mac OS X, the graphical portion of the sample 
+    visualization application does not.
+
+    The graphical visualization tool can be run by invoking
+    'sudo make test' in the 'client' sub-package directory.
+
+    The console works properly, and packets can be captured using the 
+    command 'capture [# of packets]'. Each time a packet arrives, 
+    it is rendered as a vector in the packet capture frame window.
+
+    On all platforms except Mac OS X, these vectors can be manipulated by 
+    clicking and dragging on the source or destination host. 
+    On Mac OS X, however, doing so causes the visualization window to freeze.
+
+    This appears to be a bug specifically in the Java implementation for 
+    Mac OS X. No known workarounds exist, but submissions (perhaps from 
+    someone more intimiately familiar with Mac OS X Java internals?) would 
+    be very welcome.:/
+

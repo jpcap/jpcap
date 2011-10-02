@@ -1,0 +1,86 @@
+$Id: README,v 1.6 2001/07/30 00:16:28 pcharles Exp $
+
+                       net.sourceforge.jpcap README
+
+
+  This directory contains information about the Java packages that 
+  comprise the jpcap project.
+
+
+  jpcap.capture -- Packet capture core
+
+    The shared-library and core networking and capture classes are found in
+    net.sourceforge.jpcap.capture.
+
+    PacketCapture is the central class used for packet capture operations.
+
+    To capture packets, a user application must implement either the 
+    RawPacketListener or PacketListener interface and then register 
+    with an instance of PacketCapture using either the 
+    addRawPacketListener() or addPacketListener() method.
+
+    After registering, the application must use the open() method 
+    to attach to a network interface and then call the capture() method to 
+    start receiving packets.
+
+    The procedure is relatively straightforward. In this directory is a 
+    simple command-line application which captures a raw packet and exits. 
+    The test stub can be invoked using the command:
+
+      java net.sourceforge.jpcap.capture.CaptureTest
+
+
+  jpcap.net -- Packet/Protocol library
+
+    A library of supported packet types and protocols are found in 
+    net.sourceforge.jpcap.net. The hierarchy of currently supported
+    packet types and protocols is:
+
+      Packet
+        EthernetPacket
+          ARPPacket
+          IPPacket
+            ICMPPacket
+            IGMPPacket
+            TCPPacket
+            UDPPacket
+
+    When capturing packets, the system returns the most specific 
+    instance of an object recognizable by the system. For example,
+    using the PacketListener interface, if a packet is captured 
+    which can be recognized as IP protocol, but not discernable as ICMP, 
+    TCP or UDP, then the system will return an instance of IPPacket.
+
+    If it can be ascertained that a packet is a specific protocol, like TCP,
+    then the system will send a TCPPacket. The user application can always
+    cast a specific packet object, like TCPPacket, up to a more generic
+    instance like IPPacket or EthernetPacket.
+
+
+  jpcap.client -- Sample client applications - CaptureTool
+
+    CaptureTool is a text-based console packet filtering and 
+    capture application which builds on jpcap. The application
+    also features a graphical component which can be used to 
+    visualize network traffic.
+
+    The tool can be invoked using the command: 
+
+      java net.sourceforge.pcap.client.CaptureTool
+
+    See the target 'test' in jpcap.client/makefile.
+
+
+  jpcap.simulator -- Packet capture simulator
+
+    The simulator package contains a pseudo network device and classes 
+    which randomly generate packets based on a configurable policy.
+
+    The simulator can be enabled by editing properties/tool.properties.
+
+
+  jpcap.tutorial -- Packet capture samples
+
+    A tutorial on using jpcap to capture network packets is in the 
+    net.sourceforge.jpcap.tutorial package.
+

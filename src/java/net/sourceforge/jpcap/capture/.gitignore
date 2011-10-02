@@ -1,0 +1,11 @@
+# $Id: .cvsignore,v 1.5 2004/03/17 02:04:15 pcharles Exp $
+
+# ignore generated native header prototype file
+net_sourceforge_jpcap_capture_PacketCapture.h
+
+# ignore files generated on windows
+jpcap.exp
+jpcap.dll
+
+# ignore files generated on os x
+libjpcap.jnilib

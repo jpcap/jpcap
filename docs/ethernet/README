@@ -1,0 +1,47 @@
+$Id: README,v 1.2 2001/05/24 03:37:19 pcharles Exp $
+
+             README for ethernet packet dictionary and samples
+
+
+  Introduction
+
+    This directory contains sample captured packets and information about how 
+    the packet data can be decomposed into the fields that comprise it.
+
+
+  Hierarchy
+
+    Work in progress. Hierarchy of packet types and protocols.
+
+     ?  protocol                   java class (in net.sourceforge.jpcap.net)
+     -  ------------------------   -----------------------------------------
+        ethernet/                  EthernetPacket
+     .    arp/                       ARPPacket
+            request                    .opType = ARPOperations.REQUEST
+            reply                      .opType = ARPOperations.REPLY
+     .    ip/                        IPPacket
+     .      icmp/                      ICMPPacket
+              echo request               .icmpType = ICMPMessageTypes.REQUEST
+              echo reply                 .icmpType = ICMPMessageTypes.REPLY
+            igmp/                      n/a
+     .      tcp/                       TCPPacket 
+              bgp/                       n/a
+              ftp/                       -
+                request                    -
+              telnet/                    -
+                request                    -
+              rlogin/                    -
+              smtp/                      -
+              snmp/                      -
+              ssh/
+     .      udp/                       UDPPacket
+              bootp/                     n/a
+              dns/                       -
+                addr question              -
+                ptr question               -
+                ptr answer                 -
+              ospf/                      n/a
+              rip/                       n/a
+              tftp/                      -
+          rarp/                      n/a
+

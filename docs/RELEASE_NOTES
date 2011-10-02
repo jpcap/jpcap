@@ -1,0 +1,473 @@
+RELEASE_NOTES
+
+    Release history for jpcap - Network Packet Capture Facility for Java
+
+
+------------------------------------------------------------------------------
+2011.10.01 04:15 UTC - jpcap v0.01.18
+
+  New functionality and enhancements
+
+  Bugs Fixed
+
+    o Minor revisions makefiles to allow build on OSX 10.7
+
+    o Utilize lookupDevices() java, rather than native code to fix
+      segfault on OSX 10.7
+
+------------------------------------------------------------------------------
+2004.??.00 00:00 UTC - jpcap v0.01.17
+packaged as: jpcap-0.01.17.tar.gz, jpcap-0.01.17-1.src.rpm, 
+             jpcap-0.01.17-1.i386.rpm, jpcap-0.01.17-1.alpha.rpm
+
+
+  New functionality and enhancements
+
+  Bugs Fixed
+
+    o Fixed os.makefiles to recognize mingw on Windows XP
+
+  Todo
+
+    o should allow running in non-promiscuous mode?
+
+    o should allow setSnaplen(0)
+
+    o Workaround Mac OS X Java VM bug which causes visualization tool freeze
+
+    o Release separate RH7, RH9 rpm's. Currently, jpcap works on RH8 and 
+      newer, but requires compat-libstdc++.
+
+    o Change tool.properties for windows platform during next release.
+
+    o Include all junit test invocations in makefiles. 
+
+    o Figure out why some junit tests fail.
+
+    o Change console color scheme so text appears on black or white.
+
+
+
+------------------------------------------------------------------------------
+2004.09.28 00:00 UTC - jpcap v0.01.16
+packaged as: jpcap-0.01.16.tar.gz, jpcap-0.01.16-1.src.rpm, 
+             jpcap-0.01.16-1.i386.rpm, jpcap-0.01.16-1.alpha.rpm
+
+
+  New functionality and enhancements
+
+    o Rewrote jvm recognition portion of jpcap startup script to 
+      look for wider variety of installed virtual machines
+
+    o Improved FAQ
+
+    o Added capture time query support to core packet classes
+
+    o Incorporated significant enhacements submitted by the community.
+
+    o Added ability to write tcpdump format files. (util.TcpdumpWriter).
+
+    o Obsoleted SyncPacketCapture class. Functionality now provided by 
+      PacketCapture.endCapture().
+
+    o Added little endian methods and fillBytes() methods in array helper.
+
+    o Timeval information now available in both Packet and RawPacket derivatives
+
+    o Added new accessors to Timeval class.
+
+  Bugs Fixed
+
+    o Fixed a number of minor semantic warnings under new jikes version (1.20)
+
+------------------------------------------------------------------------------
+2004.03.17 00:00 UTC - jpcap v0.01.15
+packaged as: jpcap-0.01.15.tar.gz, jpcap-0.01.15-1.src.rpm, 
+             jpcap-0.01.15-1.i386.rpm, jpcap-0.01.15-1.alpha.rpm
+
+  New functionality and enhancements
+
+    o Merged enhancements/fixes submitted by community.
+
+    o Multiple simultaneous packet capture instances are now supported.
+
+    o Project now builds on Windows using MinGW.
+
+  Bugs Fixed
+
+    o Makfiles are simplified and accomodate wider range of platforms.
+
+    o Fixed namespace collisions in tutorials.
+
+    o Fixed warnings generated during javadoc creation.
+
+  Notes
+
+    o RPM package tested on Fedora Core 1, Red Hat 9 and Red Hat 7.x.
+
+    o Windows build process tested with MinGW 3.1, MSYS 1.0.9.
+
+    o Source package tested on Mac OS X and various Linux distributions.
+
+    o Alpha architecture is still supported. Tested on Red Hat 6.0. :/
+
+------------------------------------------------------------------------------
+2003.09.24 00:00 UTC - jpcap v0.01.14
+packaged as: jpcap-0.01.14.tar.gz, jpcap-0.01.14-1.src.rpm, 
+             jpcap-0.01.14-1.i386.rpm, jpcap-0.01.14-1.alpha.rpm
+
+  New functionality and enhancements
+
+    o Added documentation on 'optimize' parameter to 
+      PacketCaptureCapable.setFilter().
+
+    o All supported packet types now implement java.io.Serializable.
+
+    o Added new unit test to exercise openOffline().
+
+    o Added new unit test for packet serialization.
+
+    o Added memory consumption test.
+
+    o Tested with J2SE 1.4.2.
+
+    o Tested on default Red Hat 9 distribution
+
+    o Port to OS X. Submitted by D. Knoester.
+
+  Bugs Fixed
+
+    o Fixed UDPPacket.getUDPData() data offset. Submitted by J. Mueller
+
+    o Fixed ICMPPacket.getICMPData() data offset. 
+
+    o Explicitly export OSTYPE in sample env_jpcap development script.
+      New versions of either bash or make no longer pick this variable up.
+
+    o Properly set linkType when using openOffline(). Fixes
+      "all packets are type EthernetPacket" bug.
+
+------------------------------------------------------------------------------
+2002.11.08 02:00 UTC - jpcap v0.01.13
+packaged as: jpcap-0.01.13.tar.gz, jpcap-0.01.13-1.src.rpm, 
+             jpcap-0.01.13-1.i386.rpm, jpcap-0.01.13-1.alpha.rpm
+
+  Merged enhancements/fixes submitted by community.
+
+  New Functionality and Enhancements
+
+    o SyncPacketCapture provides a mechanism for synchronous packet capture.
+      Submitted by C. Tzolov and N. Diakov.
+
+    o A first pass at ant support is included in the distribution.
+
+    o Various new packet accessor methods. Submitted by J. Guthrie.
+
+    o Junit tests are included in the distribution. Submitted by J. Guthrie.
+
+    o Winpcap support is improved, again. Submitted by Rex Tsai.
+
+  Bugs Fixed
+
+    o Capture performance is improved. Submitted by J. Guthrie.
+
+------------------------------------------------------------------------------
+2002.04.01 23:00 UTC - jpcap v0.01.12
+packaged as: jpcap-0.01.12.tar.gz, jpcap-0.01.12-1.src.rpm, 
+             jpcap-0.01.12-1.i386.rpm, jpcap-0.01.12-1.alpha.rpm
+
+
+  Merged enhancements/fixes submitted by community.
+
+  New Functionality
+
+    o Winpcap support is improved. Submitted by Rex Tsai.
+
+    o PacketCapture now supports lookupDevices() to query available interfaces.
+
+
+  Bugs fixed
+ 
+    o Fixed memory leak in jpcap.c processData(). Submitted by C. Walker.
+
+    o Updated information on Windows, link to Rex's site.
+
+    o Fixed bug in ARPPacket, not storing header/data.
+
+    o ARP, ICMP and UDP packets were missing specific header/data accessors.
+
+    o Examples now explicitly set BPF filter. 
+      On newer versions of libpcap, it no longer defaults to all?
+      
+------------------------------------------------------------------------------
+2002.01.10 01:00 UTC - jpcap v0.01.11
+packaged as: jpcap-0.01.11.tar.gz, jpcap-0.01.11-1.src.rpm, 
+             jpcap-0.01.11-1.i386.rpm, jpcap-0.01.11-1.alpha.rpm
+
+
+  Merged enhancements/fixes submitted by cbalcerek, dcao and jguthrie...
+
+  New Functionality
+
+    o tcpdump-formatted save files are supported via 
+      PacketCapture.openOffline()
+
+    o packet classes allow access to specific headers and data
+
+
+  Bugs Fixed
+
+    o fixed bug in array helper's long extraction utility method
+
+    o added bounds checking in packet encoding classes
+
+    o added code to adjust header lengths to accomodate TCP options
+
+------------------------------------------------------------------------------
+2001.08.25 15:30 UTC - jpcap v0.01.10
+packaged as: jpcap-0.01.10.tar.gz, jpcap-0.01.10-1.src.rpm, 
+             jpcap-0.01.10-1.i386.rpm, jpcap-0.01.10-1.alpha.rpm
+
+  New Functionality
+
+    Capture Console and Visualization Tools -- net.sourceforge.jpcap.client
+  
+      o Added 'clear' command to clear the packet visualization canvas.
+        Renamed history clear command to 'hclear.'
+
+    Packet/Protocol Library -- net.sourceforge.jpcap.net
+
+      o Optional IP and TCP header fields are now supported.
+
+      o Internet Group Management Protocol (IGMP) is now supported.
+
+
+  Bugs Fixed
+
+    o Added -fPIC options to force the compiler to emit position independent
+      code for the jpcap wrapper to address problems reported by developers 
+      using Solaris.
+
+    o Added check to packet callback handler to check for pending exceptions.
+      This fixes a bug that was causing the native code to fail in 
+      unpredictable ways when an exception was pending in the VM.
+
+    o The getHeaderLength() method on IP and TCP type packets sometimes 
+      didn't match the actual header length when option fields were present.
+      Option fields are now supported.
+
+    o ICMPPacket.getChecksum() returned the wrong value.
+
+------------------------------------------------------------------------------
+2001.08.01 16:00 UTC - jpcap v0.00.09
+
+  This release was not distributed publically. See v0.01.10 for a 
+  description of changes in both v0.00.09 and v0.01.10.
+
+------------------------------------------------------------------------------
+2001.07.16 23:30 UTC - jpcap v0.00.08
+packaged as: jpcap-0.00.08.tar.gz, jpcap-0.00.08-1.src.rpm, 
+             jpcap-0.00.08-1.i386.rpm, jpcap-0.00.08-1.alpha.rpm
+
+  New Functionality
+
+    o Many new link-layer types are supported including Linux cooked sockets
+      in order to successfully capture packets from the pseudo-device 'any'.
+
+    o Ascii escape sequence text coloring is now configurable and 
+      can be disabled via a property for shells without escape code 
+      support.
+
+    o Packet/protocol classes toString() methods no longer use 
+      ascii escape sequences by default.
+
+
+  Bugs Fixed
+
+    o Packet and byte count feature was broken in previous releases.
+
+    o Fixed bug #437807 - pseudo-device 'any' support broken.
+
+------------------------------------------------------------------------------
+2001.06.27 01:00 UTC - jpcap v0.00.07
+packaged as: jpcap-0.00.07.tar.gz, jpcap-0.00.07-1.src.rpm, 
+             jpcap-0.00.07-1.i386.rpm, jpcap-0.00.07-1.alpha.rpm
+
+  New Functionality
+
+    o Capture tool and visualization frame are now configurable via 
+      Java properties in properties/tool.properties.
+
+    o Packet capture simulator (and random packet generator) is complete.
+      All protocols are now supported. Probability of different packet types
+      occurring is configurable via properties/simulator.properties.
+
+    o Network package is more complete. Previous jpcap releases only 
+      provided accessors for 'interesting' header fields. All fields 
+      for all supported packet types, including IP, ARP, ICMP, UDP, and 
+      TCP are now accessible via the corresponding classes.
+
+
+  Bugs Fixed
+
+    o Fixed bug #433246. 'snaplen and timeout commands don't work'
+
+    o Fixed bug #433500. 'console fails without graphics device'
+
+------------------------------------------------------------------------------
+2001.06.13 19:00 UTC - jpcap v0.00.06
+packaged as: jpcap-0.00.06.tar.gz, jpcap-0.00.06-1.src.rpm, 
+             jpcap-0.00.06-1.i386.rpm, jpcap-0.00.06-1.alpha.rpm
+
+
+  New Functionality
+
+    o Added RPM distribution for Alpha architecture machines.
+
+    o Improved documentation. Javadoc archive now included in distribution.
+
+
+  Bugs Fixed
+
+    Core Capture Facility -- net.sourceforge.jpcap.capture
+
+      o Fixed bug #430425. 'Filter expression parse errors persist'
+
+      o Fixed bug #431444. 'note: older RH libpcap <0.6.x broken on Alpha.'
+
+    Capture Console and Visualization Tools -- net.sourceforge.jpcap.client
+
+      o Fixed bug #430430. 'tcp/udp vectors sometimes mislabelled'
+
+      o Fixed bug #430437. 'ConcurrModExcs while manipulating hosts'
+
+      o Added checks in native capture() and setFilter() to make sure
+        that a device is open before calling these wrapped functions.
+
+      o Improved ability of jpcap wrapper shell script to detect jpcap, 
+        java and libpcap installation locations.
+
+------------------------------------------------------------------------------
+2001.06.06 23:00 UTC - jpcap v0.00.05
+packaged as: jpcap-0.00.05.tar.gz, jpcap-0.00.05-1.i386.rpm
+
+  New Functionality 
+
+    o Added RPM distributions to the project.
+
+------------------------------------------------------------------------------
+2001.06.05 20:00 UTC - jpcap v0.00.04
+packaged as: jpcap-v0.00.04.tar.gz
+
+
+  New Functionality 
+ 
+    Core Capture Facility -- net.sourceforge.jpcap.capture
+
+      o In native component (jpcap.c) error/exception handling is 
+        consolidated.
+
+      o Package no longer contains any dependencies on external 
+        third-party jars.
+
+      o Capture performance is enhanced by the elimination of unnecessary 
+        device link-type queries.
+
+      o PacketCapture core class now implements handler interface and 
+        generic packet dispatcher.
+
+      o RawPacket interface is now cleaner. Time is encapsulated in 
+        util.Timeval. Redundant length information is removed.
+
+    Capture Console and Visualization Tools -- net.sourceforge.jpcap.client
+
+      o On systems with little memory on a busy network, the VM would quickly
+        run out of memory. The user can now put an upper bound on the history 
+        buffer size, causing it to behave like a FIFO which discards older 
+        packets when the history buffer exceeds the specified size.
+
+      o In the visualization plot, unknown IP communications are now 
+        labelled with the protocol type, even when jpcap doesn't have an 
+        implementation of the packet type.
+
+      o ICMP communication vectors are now labelled with the ICMP message 
+        type.
+      
+    System Simulator -- net.sourceforge.jpcap.simulator
+
+      o New framework in place but not yet functional.
+
+
+  Bugs Fixed
+
+    o Packet capture/dropped statistics now work.
+
+    o PacketCapture.getNetmask() was previously broken because the case of the 
+      method didn't match the native implementation.
+
+------------------------------------------------------------------------------
+2001.05.28 21:00 UTC - jpcap v0.00.03
+packaged as: jpcap-v0.00.03.tar.gz
+
+  Major modifications to packet capture facility with changes to the 
+  capture interface. First release of network traffic visualization tool.
+
+
+  New Functionality
+
+    o The sample client application has been enhanced to render
+      a real-time graphical visualization of network traffic 
+      flow between hosts during packet capture.
+
+    o Two types of data capture are now supported. Raw packet data capture 
+      for clients implementing RawPacketListener and high-level packet 
+      object capture for clients implementing PacketListener.
+
+    o For clients capturing packet objects, the following packet types 
+      and protocols are currently supported:
+
+        Packet
+          EthernetPacket
+            ARPPacket
+            IPPacket
+              ICMPPacket
+              TCPPacket
+              UDPPacket
+
+    o Added support for link-level transports with packet headers other than 
+      ethernet.
+
+
+  Bugs Fixed
+
+    o Incorrect handling of some exceptions thrown from C to Java through
+      JNI were crashing the VM.
+
+------------------------------------------------------------------------------
+2001.05.17 23:15 UTC - jpcap v0.00.02
+packaged as: jpcap-v0.00.02.tar.gz
+
+This is the initial developer's release of jpcap.
+
+
+  New Functionality
+
+    o Most libpcap functions are encapsulated in libjpcap.
+
+    o High-level packet capture interface is exposed in the class
+      net.sourceforge.jpcap.capture.PacketCapture
+
+    o A sample client which uses the core PacketCapture class has 
+      been developed. net.sourceforge.jpcap.client.CaptureTool is a 
+      console-based client which demonstrates and exercises many of the 
+      packet capture api's.
+
+------------------------------------------------------------------------------
+2001.05.15 00:00 UTC - jpcap v0.00.01
+packaged as: jpcap-v0.00.01.tar.gz
+
+  This is a test of the build/release process and was never released 
+  publically.
+
+------------------------------------------------------------------------------
+------------------------------------------------------------------------------

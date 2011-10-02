@@ -1,0 +1,109 @@
+#!/bin/sh
+#
+# $Id: jpcap,v 1.31 2004/10/02 00:52:15 pcharles Exp $
+#
+# jpcap console test tool startup script
+#
+JPCAP_V=0.01.18
+
+if [ -f /usr/bin/jpcap ]; then
+    # if jpcap rpm is installed, use the installed version
+    JPCAP_HOME=/usr/lib/jpcap-$JPCAP_V
+    EXT_JARS=$JPCAP_HOME/thirdParty/jars
+else
+    # otherwise, assume the user is trying to run out of the gz distribution. 
+    # try to figure out the location of the jpcap installation..
+    JPCAP_CWD=`echo $0 | sed s/jpcap$//g`
+    if [ -d $JPCAP_CWD/thirdParty/jars ]; then
+        JPCAP_HOME=$JPCAP_CWD
+    elif [ -d $JPCAP_CWD../thirdParty/jars ]; then
+        JPCAP_HOME=$JPCAP_CWD..
+    else
+        echo There is a problem with your jpcap installation. 
+        echo $0 could not find the required jars relative to $JPCAP_CWD.
+        exit
+    fi
+    EXT_JARS=$JPCAP_HOME/thirdParty/jars
+fi
+echo using jpcap installed at $JPCAP_HOME
+
+# find libpcap
+if [ "$LIB_PCAP" != "" ]; then
+    LIB_PCAP=$LIB_PCAP
+else
+    pdirs="/usr/lib /usr/local/lib ~"
+    pcaps="libpcap.a libpcap.o"
+    for pdir in $pdirs
+    do
+        for pcap in $pcaps
+        do 
+            if [ -f $pdir/$pcap ]; then
+                LIB_PCAP=$pdir
+                break 2
+            fi
+        done
+    done
+fi
+if [ "$LIB_PCAP" = "" ]; then
+    echo No libpcap.{so, a} found! Try pointing LIB_PCAP to library directory.
+    exit
+fi
+echo using libpcap libraries from $LIB_PCAP
+
+# find a java vm
+if [ "$JAVA_HOME" != "" ]; then
+    JAVA_HOME=$JAVA_HOME
+else
+    jdirs="/usr/java /usr/local /usr/local/java /opt /usr ~"
+    # the following might not work if the user has relocated the jdk package.
+    # todo: detect location and set based on rpm dependency?
+    for jdir in $jdirs
+    do
+        jvmpres="$jdir/j2sdk1.5* $jdir/j2sdk1.4* $jdir/j2re1.4* $jdir/j2sdk1.3* $jdir/j2re1.3* $jdir/jdk1.3* $jdir/jre1.3* $jdir/jdk1.2* $jdir/jre1.2* $jdir/IBMJava2* $jdir/j2sdk* $jdir/jdk* $jdir/jre*"
+        for jvm in $jvmpres
+        do 
+            if [ -d $jvm ]; then
+                JAVA_HOME=$jvm
+                break 2
+            fi
+        done
+    done
+fi
+if [ `uname` = "Darwin" ]; then
+    JAVA_HOME=/Library/Java/Home
+fi
+
+if [ "$JAVA_HOME" = "" ]; then
+    echo Could not find installed JVM. Please set JAVA_HOME and try again.
+    exit
+fi
+
+
+echo using Java VM at $JAVA_HOME..
+
+
+# setup using what was found..
+export JPCAP_HOME JAVA_HOME LIB_PCAP
+PATH=$JAVA_HOME/bin:$PATH
+
+if [ -e $JPCAP_HOME/jars/net.sourceforge.jpcap-$JPCAP_V.jar ]; then
+    CLASSPATH=$JPCAP_HOME/jars/net.sourceforge.jpcap-$JPCAP_V.jar
+elif [ -e $JPCAP_HOME/jars/jpcap.jar ]; then
+    CLASSPATH=$JPCAP_HOME/jars/jpcap.jar
+fi
+
+CLASSPATH=$CLASSPATH:$EXT_JARS/dev-classes_net.ultrametrics-0.03.jar
+CLASSPATH=$CLASSPATH:$EXT_JARS/fooware_CommandLine-1.0.jar
+LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$LIB_PCAP
+LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$JPCAP_HOME/lib
+DYLD_LIBRARY_PATH=$DYLD_LIBRARY_PATH:$JPCAP_HOME/lib
+export PATH CLASSPATH LD_LIBRARY_PATH
+
+if [ `uname` = "Darwin" ]; then
+    export DYLD_LIBRARY_PATH
+fi
+
+# run the console test tool
+java \
+    -Dnet.sourceforge.jpcap.properties.path=$JPCAP_HOME/properties \
+    net.sourceforge.jpcap.client.CaptureTool

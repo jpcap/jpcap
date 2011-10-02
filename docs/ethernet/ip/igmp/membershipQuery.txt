@@ -1,0 +1,34 @@
+# $Id: membershipQuery.txt,v 1.1 2001/07/30 00:05:22 pcharles Exp $
+IP - IGMP Membership Query
+
+01 00 5e 00 00 01 00 50 49 80 08 01 08 00 46 c0 
+00 20 af ac 00 00 01 02 d4 c2 c0 a8 fe fe e0 00 
+00 01 94 04 00 00 11 64 ee 9b 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 00 00
+
+
+IP - IGMP Membership Query decoded..
+
+                         link level ethernet header
+01 00 5e 00 00 01          MAC destination address 
+00 50 49 80 08 01          MAC source address 
+08 00                      ethernet type field (0x800 - ip datagram)
+                         ip header
+46                         header length and version (0x4 - IPv4, 0x6 - len)
+c0                         type of service
+00 20                      total length minus eth header (0x20 - x bytes)
+af ac                      identification, unique id of this datagram
+00 00                      3-bit flags (0x0), 13-bit fragment offset (0x000)
+01                         time to live (TTL)
+02                         protocol (02 - IGMP)
+d4 c2                      header checksum
+c0 a8 fe fe                source IP address (- 192.168.254.254)
+e0 00 00 01                 destination IP address (- 224.0.0.1)
+94 04 00 00                ip options
+                         igmp header
+11                         membership query
+64                         max response time
+ee 9b                      checksum
+00 00 00 00                group address (- 0.0.0.0)
+00 00 00 00 00 00 00 00 
+00 00 00 00 00 00

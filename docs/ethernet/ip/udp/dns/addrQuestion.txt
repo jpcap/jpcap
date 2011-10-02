@@ -1,0 +1,47 @@
+# $Id: addrQuestion.txt,v 1.1 2001/05/24 03:36:33 pcharles Exp $
+UDP - DNS Address Question - A? www.yahoo.com
+
+00 00 0d 08 ad 9d 00 00 87 3e 7d 52 08 00 45 00 
+00 3b 10 f1 00 00 40 11 2e 22 7f 00 00 01 7f 00
+00 01 04 07 00 35 00 27 6d 0c 8b a7 01 00 00 01 
+00 00 00 00 00 00 03 77 77 77 05 79 61 68 6f 6f 
+03 63 6f 6d 00 00 01 00 01
+
+
+UDP - DNS Address Question decoded..
+
+                         link level ethernet header
+00 00 0d 08 ad 9d          MAC destination address
+00 00 87 3e 7d 52          MAC source address
+08 00                      ethernet type field (0x800 - ip datagram)
+                         ip header
+45                         header length and version (0x4 - IPv4, 0x5 - len)
+00                         type of service
+00 3b                      total length minus eth header (0x3b - 59 bytes)
+10 f1                      identification, unique id of this datagram
+00 00                      3-bit flags (0x0), 13-bit fragment offset (0x000)
+40                         time to live (TTL)
+11                         protocol (17 - UDP)
+2e 22                      header checksum
+7f 00 00 01                source IP address (- 127.0.0.1)
+7f 00 00 01                destination IP address (- 127.0.0.1)
+                         udp header
+04 07                      source port number (1031)
+00 35                      destination port number (53) DNS
+00 27                      udp length (0x27 - 39 bytes)
+6d 0c                      udp checksum
+                         udp data - DNS message
+8b a7                      identification
+01                         flags (0x01 - recursion desired)
+00                         recursion available, zero and rcode
+00 01                      count of questions (1)
+00 00                      count of answer RR's (0)
+00 00                      count of authority RR's (0)
+00 00                      count of additional RR's (0)
+                         udp question records
+03 77 77 77                3 - w w w 
+05 79 61 68 6f 6f          5 - y a h o o
+03 63 6f 6d                3 - c o m
+00                         [end]
+00 01                      query type (0x01 - address record)
+00 01                      query class (0x01 - internet address)

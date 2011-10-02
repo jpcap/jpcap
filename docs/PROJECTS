@@ -1,0 +1,75 @@
+$Id: PROJECTS,v 1.3 2004/09/28 17:35:52 pcharles Exp $
+
+                                 PROJECTS
+
+
+   This documents lists references to jpcap in published papers, 
+   research projects and software applications which utilize jpcap.
+
+
+Project List
+
+   VPN Monitor
+     http://www.vpn-monitor.com/screenshots.html
+
+  VisuSniff
+    http://www.i3a.fh-trier.de/service/download/publications/VisuSniffDenmark.pdf
+  Mognet
+    http://www.node99.org/projects/mognet/
+
+
+Research Papers
+
+  Cryptographic One-Time Knocking, presented at Black Hat 2004, Las Vegas
+    http://www.hexi-dump.org/bytes.html
+
+  Pinpoint: Problem Determinate in Large, Dynamic Internet Services
+    http://roc.cs.berkeley.edu/retreats/spring_02/poster_slides/pinpoint_paper.pdf
+
+  Anatomy of an IP Fragmentation Vulnerability in Linux IPChains: 
+  Investigating Common Vulnerabilities
+    http://www.sans.org/rr/papers/60/1110.pdf
+
+  Sonificator, an open-source client-framework for SC3 in Java
+    http://on1.zkm.de/zkm/stories/storyReader$3625#abstract_kersten
+
+
+Project References
+
+  Sourceforge (jpcap main project site)
+    http://jpcap.sf.net
+
+  Freshmeat
+    http://freshmeat.net/projects/jpcap
+
+  Linux Online
+    http://www.linux.org/apps/AppId_7813.html
+
+  SecurityFocus Linux, Issue #151
+   http://www.derkeiler.com/Mailing-Lists/securityfocus/linux-secnews/2001-10/0003.html
+
+  SecurityFocus Linux, Issue #216
+    http://www.ncl.ac.uk/ucs/security/newsletters/secfocus/news.0216.txt
+
+  Wiretapped (mirror)
+    http://the.wiretapped.net/security/packet-capture/
+
+  Linux Portal
+    http://www.linuxlinks.com/Java/Development/Libraries/index.shtml
+
+
+New Submissions
+
+  If you are using jpcap and have made enhancements or bug fixes to the 
+  core capture library, please contribute them back to the master source 
+  pool. 
+
+  You can contribute by posting a message to the discussion forums at 
+  http://www.sf.net/projects/jpcap, or by emailing the project administrator
+  directly via pcharles at users.sourceforge.net.
+
+  If you've developed an application using jpcap, we're interested in 
+  hearing about it.
+
+  Happy Hacking!
+

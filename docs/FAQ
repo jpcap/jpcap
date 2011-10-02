@@ -1,0 +1,154 @@
+$Id: FAQ,v 1.13 2004/04/06 22:14:38 pcharles Exp $
+
+                             jpcap FAQ
+
+
+General
+
+  Q. Can I use JDK1.3, J2SE 1.4 or J2SE 1.5?
+
+  A. Yes. Jpcap has been tested with these VM's and works fine.
+     For backward compatibility, though, it doesn't yet utilize any 
+     VM features specific to J2SE 1.3 or later.
+
+
+  Q. I'm using JDK1.2 and the performance is terrible.
+
+  A. Although the project compiles and runs under JDK1.2, JDK1.3 or better
+     is highly recommended. In general, the performance of the 1.3 VM 
+     is superior to 1.2. The difference is especially noticeable in jpcap 
+     when using the graphical component of 
+     net.sourceforge.jpcap.client.CaptureTool to visualize network traffic. 
+
+
+  Q. Can I use JDK1.1?
+
+  A. No. jpcap uses the new JNI (Java Native Interface) and 
+     new collection classes which are not available in or compatible 
+     with JDK1.1. You need to use J2SE, JDK1.2 or later.
+
+
+  Q. I'm trying to create multiple PacketCapture instances, and 
+     it isn't working properly.
+
+  A. Upgrade to jpcap v0.01.15 or later. Multiple simultaneous 
+     packet capture instances within the same Java VM weren't supported 
+     in earlier versions of jpcap.
+
+
+  Q. I'm trying to run jpcap, or an application written to use the packet
+     capture library, and I'm getting an error similar to:
+
+       loading native library jpcap.. Exception in thread "main" 
+       java.lang.UnsatisfiedLinkError: no jpcap in java.library.path
+
+  A. This means that the jpcap shared library is not in your path.
+     On Windows, this means that jpcap.dll is not one of the directories 
+     specified by the PATH environment variable. On Unix, this means that 
+     the file libjpcap.so is not in one of the directories specified by your 
+     LD_LIBRARY_PATH. On Mac OS X, this means that the file libjpcap.jnilib
+     is not in one of the directories specified by your 
+     DYLD_LIBRARY_PATH.
+
+
+Linux 
+
+  Q. When trying to install the jpcap rpm, I get the message:
+       error: Failed dependencies:
+         libstdc++-libc6.2-2.so.3 is needed by jpcap-0.01.16-1
+
+  A. Install the compat-stdc++ rpm for backward compatibility.
+       e.g. 'yum install compat-libstdc++'
+
+
+  Q. When trying to run jpcap, I get the following error:
+       /usr/java/j2sdkx.y/bin/i386/native_threads/java: 
+       error while loading shared libraries: libstdc++-libc6.1-1.so.2: 
+       cannot open shared object file: No such file or directory
+
+  A. Install the libstdc++ backward compatibility rpm.
+       e.g. 'yum install compat-libstdc++'
+
+
+  Q. I'm calling PacketCapture.getNetwork() and .getNetmask(), and 
+     the methods always return zero or garbage.
+
+  A. These functions return random values which change with every 
+     invocation on some older versions of libpcap, notably 0.4-16 
+     included with the tool ethereal.
+
+     Upgrading to libpcap v0.6.2 or later is recommended.
+
+
+  Q. I'm trying to use jpcap on my Alpha AXP machine, but I can't 
+     capture any packets.
+
+  A. There are problems with older versions of libpcap on Alpha.
+     On 2.2.5-22 kernel Alpha machine, libpcap-0.4-19 and
+     libpcap-0.4-29 distributions packaged by redhat do not work.
+     All pcap functions return normally, but after entering 
+     pcap_loop(), no packets are ever captured and the handler
+     never called back.
+
+     On alpha, upgrade to the latest version of libpcap.
+     libpcap-0.6.2-3 (included in RawHide for Alpha distro) 
+     is recommended. Try rpmfind.org to locate the latest for 
+     your distribution.
+
+
+  Q. When trying to run jpcap, I get the following error:
+     "too many registers needed to evaluate expression".
+
+  A. This is a bug in libpcap. Upgrade to a version later than 
+     0.7, or if you are compiling your own libpcap, look for 
+     Ken Key's patch to gencode.c which fixes the problem.
+
+
+  Q. How do I build jpcap on my Linux box?
+
+  A. See the document 'docs/BUILD.unix' in the source distribution.
+
+
+Mac OS X
+
+  Q. How do I build jpcap on my Mac OS X?
+
+  A. See the document 'docs/BUILD.osx'.
+
+
+  Q. When I run the jpcap sample client, I can capture packets, but when I 
+     try to manipulate the vectors in visualization window, it freezes.
+
+  A. This appears to be a bug specifically in the Java implementation for 
+     Mac OS X. No known workarounds exist, but submissions (perhaps from 
+     someone more intimiately familiar with Mac OS X Java internals?) would 
+     be very welcome.:/
+
+
+  Q. I can't get jpcap to build from source on my Mac.
+
+  A. Upgrade to jpcap v0.01.14 or later. The makefiles in earlier versions 
+     of jpcap didn't support the Mac OS X platform without modification.
+     If you are already using jpcap v0.01.14 and still having problems, 
+     try looking at the document 'docs/BUILD.osx'.
+
+
+Windows 
+
+  Q. How do I build jpcap on my Windows box?
+
+  A. See the document 'docs/BUILD.windows'.
+
+
+  Q. When I run the jpcap.bat file on Windows, I can capture and display 
+     packets, but the console text is cluttered by weird characters.
+     These strange characters are really scaring me; they look like this:
+       [<-[1;33mTCPPacket<-[0m:
+
+  A. These strange characters are ansi escape sequences which, on most 
+     platforms, cause the text (in this case 'TCPPacket') to appear 
+     in different colors. These ansii escape sequences don't work in DOS.
+     They can be disabled in properties/tool.properties by changing 
+       net.sourceforge.jpcap.console.color=false
+
+

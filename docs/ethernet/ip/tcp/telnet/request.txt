@@ -1,0 +1,74 @@
+# $Id: request.txt,v 1.2 2001/05/27 21:16:48 pcharles Exp $
+Telnet Request
+
+00 00 00 00 00 00 00 00 00 00 00 00 08 00 45 00
+00 3c 00 56 40 00 40 06 3c 64 7f 00 00 01 7f 00 
+00 01 04 01 00 17 de f8 36 85 00 00 00 00 a0 02 
+79 60 1c f0 00 00 02 04 0f 2c 04 02 08 0a 00 06 
+90 a0 00 00 00 00 01 03 03 00
+
+00 00 00 00 00 00 00 00 00 00 00 00 08 00 45 00 
+00 28 00 57 00 00 ff 06 bd 76 7f 00 00 01 7f 00 
+00 01 00 17 04 01 00 00 00 00 de f8 36 86 50 14 
+00 00 98 37 00 00
+
+
+Telnet Request decoded..
+
+                         link level ethernet header
+00 00 00 00 00 00          MAC destination address
+00 00 00 00 00 00          MAC source address
+08 00                      ethernet type field (0x800 - ip datagram)
+                         ip header
+45                         header length and version (0x4 - IPv4, 0x5 - len)
+00                         type of service
+00 3c                      total length minus eth header (0x3c - 60 bytes)
+00 56                      identification, unique id of this datagram
+40 00                      3-bit flags (0x2), 13-bit fragment offset (0x000)
+40                         time to live (TTL)
+06                         protocol (0x06 - TCP)
+3c 64                      header checksum
+7f 00 00 01                source IP address (- 127.0.0.1)
+7f 00 00 01                destination IP address (- 127.0.0.1)
+                         tcp header
+04 01                      source port number (- 65?)
+00 17                      destination port number (0x15 - 23, telnet service)
+de f8 36 85                sequence number
+00 00 00 00                acknowledgment number
+a                          4-bit header length
+ 0 02                      6-bits reserved, urg, ack, psh, rst, syn, fin
+79 60                      window size
+1c f0                      tcp checksum
+00 00                      urgent pointer
+                         tcp options, data
+02 04 0f 2c                ?
+04 02 08 0a                ?
+00 06 90 a0                ?
+00 00 00 00                ?
+01 03 03 00                ?
+
+                         link level ethernet header
+00 00 00 00 00 00          MAC destination address
+00 00 00 00 00 00          MAC source address
+08 00                      ethernet type field (0x800 - ip datagram)
+                         ip header
+45                         header length and version (0x4 - IPv4, 0x5 - len)
+00                         type of service
+00 28                      total length minus eth header (0x28 - 40 bytes)
+00 57                      identification, unique id of this datagram
+00 00                      3-bit flags (0x0), 13-bit fragment offset (0x000)
+ff                         time to live (TTL)
+06                         protocol (0x06 - TCP)
+bd 76                      header checksum
+7f 00 00 01                source IP address (- 127.0.0.1)
+7f 00 00 01                destination IP address (- 127.0.0.1)
+                         tcp header
+00 17                      source port number (0x15 - 23, telnet service)
+04 01                      destination port number (- 66?)
+00 00 00 00                sequence number
+de f8 36 86                acknowledgment number
+5                          4-bit header length
+ 0 14                      6-bits reserved, urg, ack, psh, rst, syn, fin
+00 00                      window size
+98 37                      tcp checksum
+00 00                      urgent pointer

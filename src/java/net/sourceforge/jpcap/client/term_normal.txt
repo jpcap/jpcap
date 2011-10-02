@@ -1,0 +1,68 @@
+Full thread dump Java HotSpot(TM) Client VM (1.4.2-34 mixed mode):
+
+"DestroyJavaVM" prio=5 tid=0x00500e50 nid=0x1801200 waiting on condition [0..f0800270]
+
+"Java2D Disposer" daemon prio=10 tid=0x005126e0 nid=0x18d0c00 in Object.wait() [f0dbb000..f0dbbb20]
+        at java.lang.Object.wait(Native Method)
+        - waiting on <0x67090498> (a java.lang.ref.ReferenceQueue$Lock)
+        at java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:111)
+        - locked <0x67090498> (a java.lang.ref.ReferenceQueue$Lock)
+        at java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:127)
+        at sun.java2d.Disposer.run(Disposer.java:100)
+        at java.lang.Thread.run(Thread.java:552)
+
+"AWT-EventQueue-0" prio=6 tid=0x00511c00 nid=0x18c8800 in Object.wait() [f0d3a000..f0d3ab20]
+        at java.lang.Object.wait(Native Method)
+        - waiting on <0x677497d0> (a java.awt.EventQueue)
+        at java.lang.Object.wait(Object.java:429)
+        at java.awt.EventQueue.getNextEvent(EventQueue.java:339)
+        - locked <0x677497d0> (a java.awt.EventQueue)
+        at java.awt.EventDispatchThread.pumpOneEventForHierarchy(EventDispatchThread.java:195)
+        at java.awt.EventDispatchThread.pumpEventsForHierarchy(EventDispatchThread.java:184)
+        at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:178)
+        at java.awt.EventDispatchThread.pumpEvents(EventDispatchThread.java:170)
+        at java.awt.EventDispatchThread.run(EventDispatchThread.java:100)
+
+"AWT-Shutdown" prio=5 tid=0x005119e0 nid=0x18c8400 in Object.wait() [f0cb9000..f0cb9b20]
+        at java.lang.Object.wait(Native Method)
+        - waiting on <0x67749808> (a java.lang.Object)
+        at java.lang.Object.wait(Object.java:429)
+        at sun.awt.AWTAutoShutdown.run(AWTAutoShutdown.java:259)
+       - locked <0x67749808> (a java.lang.Object)
+        at java.lang.Thread.run(Thread.java:552)
+
+"Thread-1" prio=1 tid=0x0050d880 nid=0x188b600 runnable [f0c38000..f0c38b20]
+        at java.io.FileInputStream.readBytes(Native Method)
+        at java.io.FileInputStream.read(FileInputStream.java:194)
+        at java.io.BufferedInputStream.fill(BufferedInputStream.java:183)
+        at java.io.BufferedInputStream.read(BufferedInputStream.java:201)
+        - locked <0x67718af8> (a java.io.BufferedInputStream)
+        at java.io.DataInputStream.readLine(DataInputStream.java:562)
+        at com.fooware.util.CommandLine$PromptThread.run(CommandLine.java:184)
+
+"Thread-0" daemon prio=5 tid=0x0050c8a0 nid=0xa000a1ec runnable [0..bfffe4f0]
+
+"Signal Dispatcher" daemon prio=10 tid=0x00508150 nid=0x1814400 waiting on condition [0..0]
+
+"Finalizer" daemon prio=8 tid=0x00506bf0 nid=0x180dc00 in Object.wait() [f0a04000..f0a04b20]
+        at java.lang.Object.wait(Native Method)
+        - waiting on <0x67716868> (a java.lang.ref.ReferenceQueue$Lock)
+        at java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:111)
+        - locked <0x67716868> (a java.lang.ref.ReferenceQueue$Lock)
+        at java.lang.ref.ReferenceQueue.remove(ReferenceQueue.java:127)
+        at java.lang.ref.Finalizer$FinalizerThread.run(Finalizer.java:159)
+
+"Reference Handler" daemon prio=10 tid=0x005068c0 nid=0x1802200 in Object.wait() [f0983000..f0983b20]
+        at java.lang.Object.wait(Native Method)
+        - waiting on <0x677168d0> (a java.lang.ref.Reference$Lock)
+        at java.lang.Object.wait(Object.java:429)
+        at java.lang.ref.Reference$ReferenceHandler.run(Reference.java:115)
+        - locked <0x677168d0> (a java.lang.ref.Reference$Lock)
+
+"VM Thread" prio=5 tid=0x00506140 nid=0x1802a00 runnable
+
+"VM Periodic Task Thread" prio=10 tid=0x00508050 nid=0x1809800 waiting on condition
+"Exception Catcher Thread" prio=10 tid=0x00500fe0 nid=0x1802600 runnable
+
+"VM Periodic Task Thread" prio=10 tid=0x00508050 nid=0x1809800 waiting on condition
+"Exception Catcher Thread" prio=10 tid=0x00500fe0 nid=0x1802600 runnable

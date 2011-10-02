@@ -1,0 +1,50 @@
+# $Id: ptrQuestion.txt,v 1.1 2001/05/24 03:36:33 pcharles Exp $
+UDP - DNS PTR Question - PTR? 01.000.00.127.in-addr.arpa.
+
+00 00 0d 08 ad 9d 00 00 87 3e 7d 52 08 00 45 00 
+00 48 10 f2 00 00 40 11 2e 14 7f 00 00 01 7f 00
+00 01 04 08 00 35 00 34 05 77 9b e3 01 00 00 01 
+00 00 00 00 00 00 02 30 31 03 30 30 30 02 30 30 
+03 7f 00 00 07 69 6e 2d 61 64 64 72 04 61 72 70 
+61 00 00 0c 00 01
+
+UDP - DNS PTR Question decoded..
+
+                         link level ethernet header
+00 00 0d 08 ad 9d          MAC destination address
+00 00 87 3e 7d 52          MAC source address
+08 00                      ethernet type field (0x800 - ip datagram)
+                         ip header
+45                         header length and version (0x4 - IPv4, 0x5 - len)
+00                         type of service
+00 48                      total length minus eth header (0x3b - 59 bytes)
+10 f2                      identification, unique id of this datagram 
+00 00                      3-bit flags (0x0), 13-bit fragment offset (0x000)
+40                         time to live (TTL)
+11                         protocol (17 - UDP)
+2e 14                      header checksum
+7f 00 00 01                source IP address (- 127.0.0.1)
+7f 00 00 01                destination IP address (- 127.0.0.1)
+                         udp header
+04 08                      source port number (1032) 
+00 35                      destination port number (53) DNS
+00 34                      udp length (0x34 - 52 bytes)
+05 77                      udp checksum
+                         udp data - DNS message
+9b e3                      identification
+01                         flags (0x01 - recursion desired)
+00                         recursion available, zero and rcode
+00 01                      count of questions (1)
+00 00                      count of answer RR's (0)
+00 00                      count of authority RR's (0)
+00 00                      count of additional RR's (0)
+                         udp question records
+02 30 31                   2 - 0 1
+03 30 30 30                3 - 0 0 0
+02 30 30                   2 - 0 0
+03 31 33 34                3 - 1 2 7
+07 69 6e 2d 61 64 64 72    7 - i n - a d d r
+04 61 72 70 61             4 - a r p a
+00                         [end]
+00 0c                      query type (0x0c - pointer record)
+00 01                      query class (0x01 - internet address)

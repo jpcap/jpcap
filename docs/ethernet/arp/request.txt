@@ -1,0 +1,25 @@
+$Id: request.txt,v 1.1 2001/05/24 03:33:49 pcharles Exp $
+ARP Request
+
+00 00 0d 08 ad 9d 00 00 87 3e 7d 52 08 06 00 01 
+08 00 06 04 00 01 00 00 87 3d 7d 52 86 2a 9b 3c 
+00 00 00 00 00 00 86 2a 9b 01
+
+
+ARP Request decoded..
+
+                         link level ethernet header
+00 00 0d 08 ad 9d          MAC destination address
+00 00 87 3e 7d 52          MAC source address
+08 06                      ethernet type field (0x806 - ARP protocol)
+                         arp request/reply
+00 01                      hardware address type (0x0001 - ethernet)
+08 00                      protocol address type (0x0800 - IP)
+06                         hardware address size in bytes
+04                         protocol address size in bytes
+00 01                      operation (0x01 - ARP request)
+00 00 87 3e 7d 52          sender hardware (ethernet) address
+7f 00 00 01                sender protocol (IP) address (127.0.0.1)
+00 00 00 00 00 00          target hardware (ethernet) address
+7f 00 00 01                target protocol (IP) address (127.0.0.1)
+

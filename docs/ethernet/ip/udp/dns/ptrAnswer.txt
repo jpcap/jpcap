@@ -1,0 +1,62 @@
+# $Id: ptrAnswer.txt,v 1.1 2001/05/24 03:36:33 pcharles Exp $
+UDP - DNS PTR Answer - PTR
+
+00 00 87 3e 7d 52 00 91 93 7b b9 01 08 00 45 00 
+00 6d 9c 1a 00 00 7f 11 63 c6 7f 00 00 01 7f 00
+00 01 00 35 04 08 00 59 a4 c4 9b e3 85 80 00 01 
+00 01 00 00 00 00 02 31 34 03 31 34 38 02 34 32 
+03 31 33 34 07 69 6e 2d 61 64 64 72 04 61 72 70 
+61 00 00 0c 00 01 c0 0c 00 0c 00 01 00 00 0e 10 
+00 19 08 73 65 72 76 65 72 30 31 0a 62 70 67 75 
+73 6e 75 74 73 03 63 6f 6d 00
+
+
+UDP - DNS PTR Answer decoded..
+
+                         link level ethernet header
+00 00 87 3e 7d 52          MAC destination address
+00 91 93 7b b9 01          MAC source address
+08 00                      ethernet type field (0x800 - ip datagram)
+                         ip header
+45                         header length and version (0x4 - IPv4, 0x5 - len)
+00                         type of service
+00 6d                      total length minus eth header
+9c 1a                      identification, unique id of this datagram
+00 00                      3-bit flags (0x0), 13-bit fragment offset (0x000)
+7f                         time to live (TTL)
+11                         protocol (17 - UDP)
+63 c6                      header checksum
+7f 00 00 01                source IP address (- 127.0.0.1)
+7f 00 00 01                destination IP address (- 127.0.0.1)
+                         udp header
+00 35                      source port number (53) DNS
+04 08                      destination port number (1032)
+00 59                      udp length
+a4 c4                      udp checksum
+                         udp data - DNS message
+9b e3                      identification
+85                         flags (1000 1001 - response, inverse, RD)
+80                         recursion available (1 - yes), zero and rcode
+00 01                      count of questions (1)
+00 01                      count of answer RR's (1)
+00 00                      count of authority RR's (0)
+00 00                      count of additional RR's (0)
+                         udp resource record
+02 30 31                   2 - 0 1
+03 30 30 30                3 - 0 0 0
+02 30 30                   2 - 0 0
+03 31 32 37                3 - 1 2 7
+07 69 6e 2d 61 64 64 72    7 - i n - a d d r
+04 61 72 70 61             4 - a r p a
+00                         [end]
+00 0c                      query type (0x0c - pointer record)
+00 01                      query class (0x01 - internet address)
+c0 0c 00 0c                time to live in seconds
+00 01                      resource data length (1 - address record)
+00 00 0e 10 00 19          resource data
+08 73 65 72 76 65 72 30    8 - s e r v e r 0
+31                             1
+0a 62 70 67 75 73 6e 75    a - b o g u s n e
+74 73                          t s
+03 63 6f 6d                3 - c o m
+00                         [end]

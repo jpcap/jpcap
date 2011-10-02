@@ -1,0 +1,54 @@
+TESTING
+
+                             Test Log
+
+
+jpcap-0.01.18
+
+  o Working on Mac OS 10.7, Snow Leopard
+
+
+jpcap-0.01.16
+
+  o 2004.09.28 - i386 RPM package tested on Fedora Core 1 w/ 
+    libpcap 0.7.2-8.fc1.2 using jdk1.5.0-fcs and jdk1.4.2_04 JVM's
+
+  o 2004.09.28 - i386 RPM package tested on Red Hat 9 w/ 
+    libpcap 0.7.2-7.9.3 using jdk1.5.0-fcs and jdk1.4.2_04 JVM's
+
+  o 2004.10.01 - win32 distribution tested on Windows XP w/ WinPcap 3.1_beta_3
+    using j2sdk1.4.2_05
+
+  o 2004.10.01 - source distro on Mac OS X 10.3.3 w/ Java 1.4.2 Update 2
+
+
+jpcap-0.01.15
+
+  o 2004.03.19 - source distribution tested on Mac OS X 10.3.3
+  
+  o 2004.03.18 - i386 RPM package tested on Fedora Core 1 w/ 
+    libpcap 0.7.2-8.fc1.1 using following JVM's: jdk1.2.2, jdk1.3.1_10, 
+    jdk1.3.1_06, j2sdk1.4.2_04, j2sdk1.4.2_03, j2sdk1.5.0-beta
+
+  o 2004.03.18 - i386 RPM package tested on Red Hat 9 w/ libpcap 0.7.2-7.9.1
+    using following JVM's: jdk1.2.2, jdk1.3.1_10, jdk1.3.1_06, jdk2s1.4.2_04, 
+    j2sdk1.4.2_03, j2sdk1.5.0-beta
+
+  o 2004.03.18 - i386 RPM package tested on Red Hat 8 w/ 
+    libpcap 0.6.2-17.8.0.5 using j2sdk1.4.2_04.
+
+  o 2004.03.18 - i386 RPM package tested on Red Hat 7.2 w/ 
+    libpcap 0.6.2-17.7.2.4 using j2sdk1.4.2_03.
+
+  o 2004.03.18 - i386 RPM package tested on Red Hat 7.1 w/  
+    libpcap 0.6.2-17.7.1.2 using j2sdk1.4.2-fcs
+
+  o 2004.03.18 - Alpha RPM package tested on Red Hat 6.0 w/  
+    libpcap 0.6.2-3 using jdk1.2 ('Uncle George' port)
+
+  o 2004.03.17 - win32 distribution tested on W2K SP2 w/ WinPcap 3.1-beta
+    using j2sdk1.4.2_04
+
+  o 2004.03.16 - win32 distribution tested on W2K SP3 w/ WinPcap 2.2-beta
+    using j2sdk1.4.2_04
+

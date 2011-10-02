@@ -1,0 +1,97 @@
+$Id: CREDITS,v 1.18 2004/09/29 20:30:51 pcharles Exp $
+
+                                CREDITS
+
+  Contributors
+
+    Patrick Charles, pcharles at users.sourceforge.net
+
+      o sourceforge project administrator and primary contact
+      o core packet capture library
+      o network packet/protocol library
+      o sample capture console tool
+      o sample network traffic visualization tool
+
+    Jonas Lehmann, freecoder at users.sourceforge.net
+
+      o original project idea
+      o core packet capture library enhancements
+      o tutorial and example applications
+
+    Joyce Lin, joycelin at mit.edu
+
+      o Added little endian methods and fillBytes methods in array helper
+      o Added seconds and microseconds accessors in timeval
+      o Added FileUtility and TcpdumpWriter classes in util package
+      o Added endcapture facility to PacketCapture. Obsoleted SyncPacketCapture
+
+    John Guthrie, JGuthrie at air.org
+
+      o improved packet classes to allow access to specific headers and data
+      o added bounds checking in packet encoding classes
+      o TCP packet improvements including option field header length adjustment
+      o wrote ant build scripts
+      o implemented IPPacket.isValidChecksum() and many packet access methods
+      o fixed bounds-checking bugs in ArrayHelper
+      o wrote junit tests for core packet types    
+
+    Christian Tzolov, tzolov at cs.utwente.nl
+    Nikolay Diakov, diakov at cs.utwnte.nl
+
+      o implemented lookupDevices()
+      o added miscellaneous Windows platform enhancements
+
+    Christopher Balcerek, cbalcerek
+
+      o added ability to read tcpdump-formatted save files
+      o added snapshot length accessor
+
+    Rex Tsai, chihchun at kalug.linux.org.tw
+
+      o Windows support, tweaks to run using winpcap instead of libpcap
+      o 'Sniffer' tutorial
+
+    Jochen Mueller, j.mueller at syborg.de
+
+      o fixed bug in ARPPacket, not storing header and data.
+      o fixed UDPPacket.getUDPData() which incorrectly computed data offset
+
+    Charles Walker, cwalker
+
+      o fixed memory leak in libpcap binding.
+
+    'dcao'
+
+      o provided ArrayHelper fixes
+
+    Dave Knoester, knoeste1 at cse.msu.edu
+
+      o OS X port
+      o fixed tutorial namespace collision
+
+    Doctor J, doctorj at users.sourceforge.net
+
+      o Windows MinGW build instructions (docs/BUILD.windows)
+      o Fixed reversed flag and win fields in TCP packet.
+      o Patch to fix env_jpcap for folks with project paths containing spaces
+
+    Anatol Novchenko, xanatol at users.sourceforge.net
+
+      o Implemented support for multiple simulateneous capture sessions
+
+
+  Contributing
+
+    If you are using jpcap and have made enhancements or bug fixes to the 
+    core capture library, please contribute them back to the master source 
+    pool. 
+
+    You can contribute by posting a message to the discussion forums at 
+    http://www.sf.net/projects/jpcap, or by emailing the project administrator
+    directly to pcharles at users.sourceforge.net.
+
+    If you've developed an application using jpcap, we're interested in 
+    hearing about it.
+
+    Happy Hacking!
+

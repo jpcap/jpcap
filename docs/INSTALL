@@ -1,0 +1,56 @@
+$Id: INSTALL,v 1.9 2002/04/02 00:46:29 pcharles Exp $
+
+              net.sourceforge.jpcap installation information
+
+
+  Installation Procedure
+
+    0. These instructions are only relevant if you fetched the .tar.gz 
+       distribution. If you are reading this, you've probably already 
+       fetched and unarchived the distribution. If so, skip to step #4.
+
+    1. Fetch the latest jpcap distribution from http://sf.net/projects/jpcap.
+       The distribution is a tar file. i.e. jpcap-X.YY.ZZ.tar.gz
+
+        The tar file contains the following:
+          - jpcap project source and class files compiled for any platform
+          - source code for libjpcap (a pcap wrapper containing java hooks)
+          - libjpcap.so compiled for Linux/intel platforms
+          - makefiles for building the project on most unix platforms
+          - a sample application for visualizing network traffic
+
+        The distribution does not contain pcap.
+        libpcap can be downloaded from its authors at http://www.tcpdump.org/.
+
+        If you are using Windows, you'll need to install winpcap from
+          http://netgroup-serv.polito.it/winpcap/
+
+        For instructions on tweaking jpcap to run on Windows, check out
+          http://kalug.linux.org.tw/~chihchun/Lab/index.php/Jpcap
+
+     2. Unarchive the jpcap distribution using the following command:
+        gunzip -c jpcap-X.YY.ZZ.tar.gz | tar xvf -
+
+     3. Go into the directory containing the distribution:
+        cd jpcap-X.YY.ZZ
+
+     4. A shell script wrapper which runs the sample capture and network
+        traffic visualization tool is located in jpcap/scripts/jpcap.
+
+     5. You may need to edit this script file to specify the location where 
+        a Java VM is installed on your system.
+
+     6. Run the test application:
+
+          ./jpcap
+
+
+        In order to use certain commands, including 'capture', you might 
+        need to run the application as root.
+
+
+     7. If you need assistance, check under Forum (in the Help area) 
+        or under Support (in the Support Request tracking tool.)
+
+          The project is hosted at http://sf.net/projects/jpcap/
+

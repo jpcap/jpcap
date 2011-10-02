@@ -1,0 +1,35 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<title>net.sourceforge.jpcap.capture</title>
+<!--
+
+  $Id: package.html,v 1.1 2001/06/14 01:21:53 pcharles Exp $
+
+  @(#)package.html
+  Description of jpcap.capture package contents.
+  Used by javadoc to generate package-level information.
+
+-->
+</head>
+<body bgcolor="white">
+
+Provides an interface for capturing packets and a layer of abstraction 
+around libpcap, a portable native system library for capturing network 
+packets.
+<p>
+PacketCapture is the core of the packet capture system provided by jpcap.
+<p>
+Applications wishing to capture network packets create an instance of 
+PacketCapture and call its methods in order to open a network device,
+set packet filters and ultimately receive packet data from the network.
+<p>
+PacketCapture utilizes a publish/subscribe pattern to broadcast packets 
+to all objects which have registered as listeners for events of 
+interest. Applications capturing network data must implement PacketListener 
+and register with an instance of the capture system in order to receive
+packets.
+<p>
+
+</body>
+</html>

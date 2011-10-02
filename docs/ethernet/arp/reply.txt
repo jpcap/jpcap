@@ -1,0 +1,28 @@
+$Id: reply.txt,v 1.1 2001/05/24 03:33:34 pcharles Exp $
+ARP Reply
+
+00 00 87 3e 7d 53 00 00 0d 08 ad 9e 08 06 00 01 
+08 00 06 04 00 02 00 00 0d 08 ad 9e 7f 00 00 01
+00 00 87 3e 7d 53 7f 00 00 01 00 00 00 00 00 00 
+00 00 00 00 00 00 00 00 00 00 00 00
+
+
+ARP Reply decoded..
+
+                         link level ethernet header
+00 00 87 3e 7d 53          MAC destination address
+00 00 0d 08 ad 9e          MAC source address
+08 06                      ethernet type field (0x806 - ARP protocol)
+                         arp request/reply
+00 01                      hardware address type (0x0001 - ethernet)
+08 00                      protocol address type (0x0800 - IP)
+06                         hardware address size in bytes
+04                         protocol address size in bytes
+00 02                      operation (0x02 - ARP reply)
+00 00 0d 08 ad 9e          sender hardware (ethernet) address
+7f 00 00 01                sender protocol (IP) address (127.0.0.1)
+00 00 87 3e 7d 53          target hardware (ethernet) address
+7f 00 00 01                target protocol (IP) address (127.0.0.1)
+00 00 00 00 00 00 00 00    padding..
+00 00 00 00 00 00 00 00 
+00 00

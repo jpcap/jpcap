@@ -1,0 +1,51 @@
+$Id: BUILD.windows,v 1.5 2004/10/01 23:41:06 pcharles Exp $
+
+         net.sourceforge.jpcap build information - Windows
+
+
+  Active jpcap development is taking place on Unix platforms.
+  However, jpcap should run on any platform where libpcap is implemented.
+
+  If you'd like to build the .dll yourself, the following instructions 
+  should work on Windows with MinGW.
+
+
+  Build Procedure
+
+    1. Install the prerequisite tools:
+
+      o Get the Java 2 SDK, if you don't already have it:
+          http://java.sun.com
+ 
+      o Download and install MinGW and MSYS, if you don't already have it:
+          http://www.mingw.org/download.shtml 
+
+      o Download and install the WinPcap developer's pack and auto-installer:
+          http://winpcap.polito.it/install/default.htm
+ 
+      o Download the latest jpcap source tarball:
+          http://sourceforge.net/projects/jpcap
+
+
+    2. The script scripts/env_jpcap is an example environment setup script.
+
+       The file env_jpcap contains PROJECT_HOME and WINPCAP_HOME
+       environment variables which you MUST EDIT.
+
+       After editing the script, open a MSYS shell window and execute:
+
+         # setup your jpcap development environment
+         . ~/path/to/jpcap/scripts/env_jpcap
+
+
+    3. Build the project using MinGW's gnu-make. In the MSYS shell window:
+
+         # build the project using gnu make or mingw32-make
+         cd ~/path/to/jpcap/
+         make
+
+
+
+    This procedure was tested using MinGW 3.1.0-1, MSYS-1.0.10,
+    Sun's JDK1.4.2_04 and WinPcap v. 3.1.
+

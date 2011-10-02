@@ -1,0 +1,35 @@
+# $Id: v2MembershipReport.txt,v 1.1 2001/07/30 00:05:22 pcharles Exp $
+IP - IGMP v2 Membership Report
+
+01 00 5e 00 00 02 00 e0 4c 75 36 65 08 00 46 00 
+00 20 d6 92 00 00 01 02 b0 1f c0 a8 fd 7a e0 00 
+00 02 94 04 00 00 16 00 09 fd e0 00 00 02 20 20 
+20 20 20 20 20 20 20 20 20 20 20 20
+
+
+IP - IGMP v2 Membership Report decoded..
+
+                         link level ethernet header
+01 00 5e 00 00 02          MAC destination address 
+00 e0 4c 75 36 65          MAC source address 
+08 00                      ethernet type field (0x800 - ip datagram)
+                         ip header
+46                         header length and version (0x4 - IPv4, 0x6 - len)
+00                         type of service
+00 20                      total length minus eth header (0x20 - x bytes)
+d6 92                      identification, unique id of this datagram
+00 00                      3-bit flags (0x0), 13-bit fragment offset (0x000)
+01                         time to live (TTL)
+02                         protocol (02 - IGMP)
+b0 1f                      header checksum
+c0 a8 fd 7a                source IP address (- 192.168.253.122)
+e0 00 00 02                destination IP address (- 224.0.0.2)
+94 04 00 00                ip options
+                         igmp header
+16                         v2 membership report
+00                         max response time
+09 fd                      checksum
+e0 00 00 02                group address (- 224.0.0.2)
+20 20 20 20 20 20 20 20 
+20 20 20 20 20 20
+

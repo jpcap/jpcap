@@ -1,0 +1,40 @@
+$Id: BUILD.unix,v 1.4 2004/03/16 23:09:19 pcharles Exp $
+
+             net.sourceforge.jpcap build information - Unix
+
+
+  Build Procedure
+
+    0. These instructions are only relevant if you fetched the jpcap 
+       .tar.gz or source RPM distribution and are interested in 
+       working on jpcap or developing applications which utilize jpcap.
+
+       If you downloaded the binary RPM and only wish to run the 
+       jpcap tools, see README.
+
+
+    1. Before you build the project you must have installed and in your path
+
+      o JDK1.2+
+      o gmake
+
+
+    2. The script scripts/env_jpcap is an example environment setup script.
+
+       The file env_jpcap contains a PROJECT_HOME environment variable which 
+       you MUST EDIT to point to your jpcap workspace.
+
+       After editing the script, execute:
+
+         # setup your jpcap development environment
+         . ~/path/to/jpcap/scripts/env_jpcap
+
+       Alternatively, if you know what you're doing, use env_jpcap 
+       as a template to create your own environment setup script.
+
+
+    3. Build the project using gnu-make:
+
+         # build the project
+         cd ~/path/to/jpcap/
+         make

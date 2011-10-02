@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project basedir="." default="all" name="jpcap">
+
+  <property environment="env"/>
+  <property name="java.src.dir" value="./src/java" />
+  <property name="jpcap.c.src.dir"
+            value="${java.src.dir}/net/sourceforge/jpcap/capture" />
+  <property name="packet.capture.class"
+            value="classes/net/sourceforge/jpcap/capture/PacketCapture.class" />
+            
+  <!-- set up the compile classpath -->
+  <path id="compile.class.path">
+    <pathelement path="${classpath}" />
+    <fileset dir="thirdParty/jars">
+      <include name="**/*.jar" />
+      <include name="**/*.zip" />
+    </fileset>
+  </path>
+
+  <!-- set up the run classpath (for unit tests) -->
+  <path id="run.class.path">
+    <pathelement path="${classpath}" />
+    <fileset dir="thirdParty/jars">
+      <include name="**/*.jar" />
+      <include name="**/*.zip" />
+    </fileset>
+    <fileset dir="jars">
+      <include name="**/*.jar" />
+    </fileset>
+  </path>
+
+  <target name="all" depends="build-jpcap"
+    description="==> builds jpcap jars and native library" />
+
+  <target name="build-jpcap" depends="init,jar,natives"
+    description="==> builds jpcap jars and native library" />
+
+  <!-- make sure we have all the dirs we need -->
+  <target name="init">
+    <mkdir dir="lib" />
+    <mkdir dir="include" />
+    <mkdir dir="classes" />
+    <mkdir dir="jars" />
+    <available classname="junit.framework.TestCase" property="junit.present"
+               classpathref="compile.class.path" />
+
+    <condition property="IsWindows" value="true">
+      <os family="windows" />
+    </condition>
+
+    <condition property="IsUnix" value="true">
+      <and>
+	<os family="unix" />
+	<not> <os family="mac" /> </not>
+      </and>
+    </condition>
+
+    <condition property="IsMacOsX" value="true">
+	<and>
+	  <os family="unix" />
+	  <os family="mac" />
+	</and>
+    </condition>
+  </target>
+
+  <target name="natives" depends="check-for-capture-class,init"
+    description="==> builds native libraries for this platform">
+    <javah
+         class="net.sourceforge.jpcap.capture.PacketCapture"
+         classpath="classes"
+         outputFile="include/net_sourceforge_jpcap_capture_PacketCapture.h" />
+    <!-- only one (at most) of these will execute -->
+    <antcall target="make-unix-natives" />
+    <antcall target="make-windows-natives" />
+    <antcall target="make-macosx-natives" />
+    <!-- do the copy via another ant target we can "if" 
+         only one of these should actually execute -->
+    <antcall target="install-linux-libjpcap" />
+    <antcall target="install-w2k-jpcap-dll" />
+    <antcall target="install-macosx-libjpcap" />
+  </target>
+  
+  <target name="make-macosx-natives" if="IsMacOsX" >
+    <!-- <echo message="Running the native build for Mac OS X" /> -->
+    <exec dir="${jpcap.c.src.dir}" executable="make">
+        <env key="MAKE_HOME" value="../../../../../../make"/>
+        <env key="CLASSPATH" value="../../../../../../classes"/>
+        <arg line="libjpcap.jnilib"/>
+    </exec>
+  </target>
+
+  <target name="make-unix-natives" if="IsUnix">
+    <exec dir="${jpcap.c.src.dir}" executable="make">
+        <env key="MAKE_HOME" value="../../../../../../make"/>
+        <arg line="libjpcap.so"/>
+    </exec>
+  </target>
+
+  <target name="make-windows-natives" if="IsWindows">
+    <exec dir="${jpcap.c.src.dir}" executable="make.exe">
+        <env key="MAKE_HOME" value="../../../../../../make"/>
+        <arg line="jpcap.dll"/>
+    </exec>
+  </target>
+
+  <target name="install-macosx-libjpcap" depends="check-for-libjpcap"
+          if="libjpcap.jnilib.exists">
+    <copy file="${jpcap.c.src.dir}/libjpcap.jnilib" todir="lib" />
+  </target>
+
+  <target name="install-linux-libjpcap" depends="check-for-libjpcap"
+          if="libjpcap.so.exists">
+    <copy file="${jpcap.c.src.dir}/libjpcap.so" todir="lib" />
+  </target>
+
+  <target name="check-for-libjpcap">
+    <available property="libjpcap.so.exists"
+          file="${jpcap.c.src.dir}/libjpcap.so" />
+    <available property="libjpcap.jnilib.exists"
+        file="${jpcap.c.src.dir}/libjpcap.jnilib" />
+  </target>
+
+  <target name="install-w2k-jpcap-dll" depends="check-for-jpcap-dll"
+          if="jpcap.dll.exists">
+    <copy file="${jpcap.c.src.dir}/jpcap.dll" todir="lib" />
+  </target>
+
+  <target name="check-for-jpcap-dll">
+    <available property="jpcap.dll.exists"
+          file="${jpcap.c.src.dir}/jpcap.dll" />
+  </target>
+
+  <!-- check for the JNI file, else fail -->
+  <target name="check-for-capture-class" depends="prop-for-capture-class"
+          unless="capture.class.exists">
+    <fail message="missing ${packet.capture.class}" />
+  </target>
+
+  <target name="prop-for-capture-class">
+    <available property="capture.class.exists"
+          file="${packet.capture.class}" />
+  </target>
+
+  <!-- build JPCAP classes -->
+  <target name="java-compile" depends="init"
+    description="==> compiles all jpcap java classes">
+    <javac srcdir="src/java"
+	   destdir="classes"
+	   debug="true"
+	   optimize="false"
+	   includes="**/*.java">
+      <classpath refid="compile.class.path"/>
+    </javac>
+  </target>
+
+  <!-- build jarfiles of classes -->
+  <target name="jar" depends="java-compile"
+    description="==> jars all jpcap java classes (also core in separate jar)">
+    <!-- first jarfile is everything -->
+    <jar jarfile="jars/jpcap.jar"
+         basedir="classes"
+         includes="net/**/*.class"/>
+    <!-- second jarfile excludes tests, tutorial, clients -->
+    <jar jarfile="jars/jpcap-core.jar"
+         basedir="classes"
+	 excludes="**/test/*.class,**/tutorial/*.class,
+	           **/client/*.class,**/simulator/*.class,
+                   **/*TestProbe.class"
+         includes="net/**/*.class"/>
+  </target>
+
+  <!-- delete all generated files and directories -->
+  <target name="clean"
+    description="==> removes all generated directories and compilation stuff">
+    <delete includeEmptyDirs="yes">
+      <!-- delete class files -->
+      <fileset dir="classes" />
+      <!-- delete class jarfile -->
+      <fileset dir="jars" />
+      <!-- delete javah-generated include -->
+      <fileset dir="include" />
+      <!-- delete lib(s) -->
+      <fileset dir="lib" />
+      <!-- delete libraries generated in source tree -->
+      <fileset dir="${jpcap.c.src.dir}">
+	<include name="*.o"/>
+	<include name="*.so"/>
+	<include name="*.dll"/>
+        <include name="*.jnilib" />        
+      </fileset>
+      <!-- delete generated javadoc -->
+      <fileset dir="docs/api" />
+    </delete>
+  </target>
+
+  <target name="docinit">
+    <mkdir dir="docs" />
+    <mkdir dir="docs/api" />
+  </target>
+
+  <!-- build html documentation -->
+  <target name="javadoc" depends="docinit,jar"
+    description="==> generates javadoc API">
+    <javadoc sourcepath="${java.src.dir}"
+	     destdir="docs/api"
+	     packagenames="net.sourceforge.jpcap.capture,
+                           net.sourceforge.jpcap.client,
+                           net.sourceforge.jpcap.net,
+                           net.sourceforge.jpcap.util"
+             classpathref="run.class.path"
+	     author="yes"
+	     version="yes"/>
+  </target>
+
+  <target name="test" depends="init,jar" if="junit.present"
+    description="==> runs JUnit unit tests">
+    <taskdef name="junit"
+      classname="org.apache.tools.ant.taskdefs.optional.junit.JUnitTask">
+      <classpath refid="run.class.path"/>
+    </taskdef>
+    <junit printsummary="yes" haltonfailure="no">
+      <classpath>
+        <path refid="run.class.path"/>
+      </classpath>
+      <formatter type="plain" usefile="false"/>
+      <batchtest>
+        <fileset dir="${java.src.dir}">
+          <exclude name="net/sourceforge/jpcap/capture/CaptureTest.java" />
+          <include name="**/*Test.java"/>
+        </fileset>
+      </batchtest>
+    </junit>
+  </target>
+
+</project>
