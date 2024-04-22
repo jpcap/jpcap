@@ -46,7 +46,7 @@
     jpcap should run on any platform where libpcap is implemented.
 
     For building the jpcap library on Windows, the MinGW environment is 
-    recommended. Also, the Windows port of libpcap, known as winpcap, is 
+    recommended. Also, the Windows port of libpcap, known as npcap, is 
     required. For more information, have a look at docs/BUILD.windows.
 
     jpcap on Mac OS X is supported. Refer to the file docs/BUILD.osx.
