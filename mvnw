@@ -37,7 +37,7 @@ if ! ls "$DIST_ROOT"/*/bin/mvn >/dev/null 2>&1; then
   unzip -q -o "$ZIP" -d "$DIST_ROOT"
 fi
 
-MAVEN_HOME=$(ls -d "$DIST_ROOT"/*/ 2>/dev/null | head -1)
+MAVEN_HOME=$(ls -d "$DIST_ROOT"/apache-maven-*/ 2>/dev/null | head -1)
 MAVEN_HOME=${MAVEN_HOME%/}
 chmod +x "$MAVEN_HOME/bin/mvn"
 

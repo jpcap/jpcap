@@ -34,6 +34,8 @@ What changed vs upstream
     ArrayHelper.extract* bounds checks restored, PropertyHelper falls
     back to the classpath instead of System.exit(1) when properties
     aren't on disk, CommandLine REPL no longer blocks GUI startup.
+  * client.Settings / simulator.Settings have code-level defaults;
+    properties files are optional overrides, not mandatory.
   * Cleanups across ~90 files: CVS metadata, _rcsid fields,
     StringBuffer, raw collections.
 
@@ -94,10 +96,26 @@ No-root option (macOS)
 Simulator mode (no root, no libpcap)
 ------------------------------------
 
-Flip `net.sourceforge.jpcap.simulator=true` in
-`src/main/resources/tool.properties`, rebuild, and CaptureTool will
-synthesise traffic instead of opening a real device. Handy for
+Launch CaptureTool with `-Dnet.sourceforge.jpcap.simulator=true` (or
+drop a `tool.properties` containing that key into the cwd) and it
+will synthesise traffic instead of opening a real device. Handy for
 demoing the GUI without privileges.
+
+
+Configuration overrides
+-----------------------
+
+Every Settings value is baked in as a code-level default; the
+project ships no `.properties` files. To override colours, canvas
+size, simulator probabilities etc., drop a `tool.properties` /
+`simulator.properties` into one of:
+
+  -Dnet.sourceforge.jpcap.properties.path=/some/dir
+  ~/properties/
+
+or on the classpath. See the JavaDoc on
+`net.sourceforge.jpcap.client.Settings` and
+`net.sourceforge.jpcap.simulator.Settings` for the keys.
 
 
 Using as a library

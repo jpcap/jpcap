@@ -6,67 +6,69 @@
 package net.sourceforge.jpcap.simulator;
 
 import java.util.Properties;
+
 import net.sourceforge.jpcap.util.PropertyHelper;
 
 /**
  * Simulator settings.
- *
+ * <p>
+ * Defaults are baked in; {@code simulator.properties} is only consulted to
+ * override them. The simulator boots even when the file is absent.
  */
-public class Settings
-{
-  public static String PROPERTY_PKG = "net.sourceforge.jpcap.simulator";
-  public static String PROPERTY_FILE = "simulator.properties";
+public class Settings {
 
-  public static int SIM_NETWORK;
-  public static int SIM_NETMASK;
-  public static float PROB_ETH_IP;
-  public static float PROB_ETH_ARP;
-  public static float PROB_ETH_RARP;
-  public static float PROB_ETH_OTHER;
-  public static float PROB_IP_TCP;
-  public static float PROB_IP_UDP;
-  public static float PROB_IP_ICMP;
-  public static float PROB_IP_OTHER;
-  public static float PROB_ARP_REQUEST;
-  public static float PROB_ARP_REPLY;
+    public static final String PROPERTY_PKG = "net.sourceforge.jpcap.simulator";
+    public static final String PROPERTY_FILE = "simulator.properties";
 
-  // default search paths for property file location
-  public static String [] PATH_DEFAULTS = {
-    System.getProperties().getProperty
-    ("net.sourceforge.jpcap.properties.path"),
-    System.getProperties().getProperty("user.home") + "/properties"
-  };
+    private static final int DEFAULT_NETWORK = ip(10, 0, 0, 128);
+    private static final int DEFAULT_NETMASK = ip(255, 255, 255, 248);
 
-  static {
-    Properties properties = PropertyHelper.load(PATH_DEFAULTS, PROPERTY_FILE);
-    if(properties == null || properties.size() == 0) {
-      System.err.println("FATAL: simulator cannot start without properties!");
-      System.exit(1);
+    public static final int SIM_NETWORK;
+    public static final int SIM_NETMASK;
+
+    public static final float PROB_ETH_IP;
+    public static final float PROB_ETH_ARP;
+    public static final float PROB_ETH_RARP;
+    public static final float PROB_ETH_OTHER;
+
+    public static final float PROB_IP_TCP;
+    public static final float PROB_IP_UDP;
+    public static final float PROB_IP_ICMP;
+    public static final float PROB_IP_OTHER;
+
+    public static final float PROB_ARP_REQUEST;
+    public static final float PROB_ARP_REPLY;
+
+    public static final String[] PATH_DEFAULTS = {
+        System.getProperty("net.sourceforge.jpcap.properties.path"),
+        System.getProperty("user.home") + "/properties"
+    };
+
+    static {
+        Properties p = PropertyHelper.load(PATH_DEFAULTS, PROPERTY_FILE);
+
+        SIM_NETWORK = PropertyHelper.getIpProperty(p, PROPERTY_PKG + ".network", DEFAULT_NETWORK);
+        SIM_NETMASK = PropertyHelper.getIpProperty(p, PROPERTY_PKG + ".mask",    DEFAULT_NETMASK);
+
+        PROB_ETH_IP    = aFloat(p, ".prob.eth.ip",    0.90f);
+        PROB_ETH_ARP   = aFloat(p, ".prob.eth.arp",   0.05f);
+        PROB_ETH_RARP  = aFloat(p, ".prob.eth.rarp",  0.00f);
+        PROB_ETH_OTHER = aFloat(p, ".prob.eth.other", 0.05f);
+
+        PROB_IP_TCP    = aFloat(p, ".prob.ip.tcp",    0.60f);
+        PROB_IP_UDP    = aFloat(p, ".prob.ip.udp",    0.20f);
+        PROB_IP_ICMP   = aFloat(p, ".prob.ip.icmp",   0.05f);
+        PROB_IP_OTHER  = aFloat(p, ".prob.ip.other",  0.05f);
+
+        PROB_ARP_REQUEST = aFloat(p, ".prob.arp.request", 0.50f);
+        PROB_ARP_REPLY   = aFloat(p, ".prob.arp.reply",   0.50f);
     }
 
-    SIM_NETWORK = PropertyHelper.getIpProperty
-      (properties, PROPERTY_PKG + ".network");
-    SIM_NETMASK = PropertyHelper.getIpProperty
-      (properties, PROPERTY_PKG + ".mask");
-    PROB_ETH_IP = PropertyHelper.getFloatProperty
-      (properties, PROPERTY_PKG + ".prob.eth.ip");
-    PROB_ETH_ARP = PropertyHelper.getFloatProperty
-      (properties, PROPERTY_PKG + ".prob.eth.arp");
-    PROB_ETH_RARP = PropertyHelper.getFloatProperty
-      (properties, PROPERTY_PKG + ".prob.eth.rarp");
-    PROB_ETH_OTHER = PropertyHelper.getFloatProperty
-      (properties, PROPERTY_PKG + ".prob.eth.other");
-    PROB_ARP_REQUEST = PropertyHelper.getFloatProperty
-      (properties, PROPERTY_PKG + ".prob.arp.request");
-    PROB_ARP_REPLY = PropertyHelper.getFloatProperty
-      (properties, PROPERTY_PKG + ".prob.arp.reply");
-    PROB_IP_TCP = PropertyHelper.getFloatProperty
-      (properties, PROPERTY_PKG + ".prob.ip.tcp");
-    PROB_IP_UDP = PropertyHelper.getFloatProperty
-      (properties, PROPERTY_PKG + ".prob.ip.udp");
-    PROB_IP_ICMP = PropertyHelper.getFloatProperty
-      (properties, PROPERTY_PKG + ".prob.ip.icmp");
-    PROB_IP_OTHER = PropertyHelper.getFloatProperty
-      (properties, PROPERTY_PKG + ".prob.ip.other");
-  }
+    private static float aFloat(Properties p, String suffix, float defaultValue) {
+        return PropertyHelper.getFloatProperty(p, PROPERTY_PKG + suffix, defaultValue);
+    }
+
+    private static int ip(int a, int b, int c, int d) {
+        return (a << 24) | (b << 16) | (c << 8) | d;
+    }
 }
