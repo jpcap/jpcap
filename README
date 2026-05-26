@@ -1,109 +1,125 @@
+jpcap (modernised fork)
+=======================
+
+This is a modernised fork of the original **jpcap** library by
+Patrick Charles & Jonas Lehmann (https://github.com/jpcap/jpcap,
+SourceForge, 2001-2004). Upstream development stopped over two
+decades ago; this fork brings the code forward so it builds and runs
+on a current JDK without touching any of the C/JNI machinery.
+
+Upstream:  https://github.com/jpcap/jpcap (original, unmaintained)
+This fork: https://github.com/kevoroid/jpcap
 
 
-                               jpcap README
+What changed vs upstream
+------------------------
+
+  * Builds with Apache Maven (with bundled wrapper) targeting JDK 21.
+  * Native libpcap binding rewritten on top of Pcap4J + JNA 5.14 -- no
+    libjpcap.{so,jnilib,dll} JNI library to compile, and Apple Silicon
+    is supported out of the box.
+  * Maven layout: src/main/java, src/test/java, src/main/resources.
+  * JUnit 3 TestCase suites migrated to JUnit 5 (Jupiter); all 47
+    tests pass.
+  * Vendor jars (com.fooware.util.CommandLine, net.ultrametrics.console
+    .TestConsole) replaced with minimal in-project equivalents in
+    net.sourceforge.jpcap.client.
+  * Swing visualisation (CaptureTool) reworked: PacketVisualizationCanvas
+    is now a JPanel that paints through paintComponent(Graphics), so
+    the host/edge layout reflows on window resize. Default canvas
+    bumped to 1280x800; renderers anti-aliased.
+  * Reverse DNS for hosts: shared 4-thread daemon pool, results cached
+    per-IP, repaint triggered when a name resolves.
+  * Bugs fixed: IPPacket.onesCompSum off-by-one (checksums now validate),
+    ArrayHelper.extract* bounds checks restored, PropertyHelper falls
+    back to the classpath instead of System.exit(1) when properties
+    aren't on disk, CommandLine REPL no longer blocks GUI startup.
+  * Cleanups across ~90 files: CVS metadata, _rcsid fields,
+    StringBuffer, raw collections.
 
 
-  General Information
+Build and run
+-------------
 
-    jpcap is a set of Java classes which provide an interface and system 
-    for network packet capture. A protocol library and tool for visualizing 
-    network traffic is included. 
+The repo ships a Maven wrapper that downloads Maven 3.9.9 on first use.
 
-    jpcap hides the low-level details of network packet capture by 
-    abstracting many network packet types and protocols into Java classes. 
-    Internally, jpcap implements bindings to the libpcap system library 
-    through JNI (the Java Native Interface). 
+    ./mvnw package           # compile + test + jar; produces target/jpcap-*.jar
+    ./mvnw test              # tests only (47 unit tests)
 
-    jpcap utilizes libpcap, a widely deployed shared-library for capturing 
-    user-level packets. libpcap must be installed on your system in order 
-    to use jpcap.
-
-    jpcap consists of a small shared-library which wraps libpcap plus a 
-    collection of Java classes. The shared-library component provides event
-    hooks, communication and data conversion between a running Java VM and 
-    libpcap. The 'capture' package contains the core capture system.
-    The 'net' package contains abstractions for many network packet types 
-    and protocols. The 'simulator' package contains a network simulator.
-
-    jpcap is licensed under the Mozilla Public License. See docs/MPL-1.1.txt.
+Requirements: JDK 21 or later on PATH, plus libpcap (Linux/macOS) or
+Npcap (Windows) at runtime for live capture.
 
 
-  Running the Samples
+GUI capture tool (live)
+-----------------------
 
-    If you have installed from RPM and are looking to run the capture tool,
-    try /usr/bin/jpcap.
+    CP="target/classes:$(./mvnw -q dependency:build-classpath -Dmdep.outputFile=/dev/stdout 2>/dev/null | tail -1)"
+    sudo java -cp "$CP" net.sourceforge.jpcap.client.CaptureTool
 
-    If you installed from .gz, try ./jpcap.
+A Swing window opens (network graph) and the terminal shows a
+`CaptureTool>` prompt. Useful commands:
 
-    jpcap can also be run in 'simulator' mode. In this mode, a pseudo
-    network interface randomly generates network traffic for capture.
-    The simulator can be enabled in properties/tool.properties.
-
-
-  Unix vs. Mac OS X vs. Windows
-
-    Active jpcap development is taking place on Unix platforms. However, 
-    jpcap should run on any platform where libpcap is implemented.
-
-    For building the jpcap library on Windows, the MinGW environment is 
-    recommended. Also, the Windows port of libpcap, known as winpcap, is 
-    required. For more information, have a look at docs/BUILD.windows.
-
-    jpcap on Mac OS X is supported. Refer to the file docs/BUILD.osx.
+    device en0          # pick a NIC (autodetect runs first)
+    filter tcp port 443 # optional BPF filter
+    capture 100         # capture 100 packets
+    capture -1          # capture forever (Ctrl-C to stop)
+    status              # show device, filter, snaplen, ...
+    help                # full list
+    exit                # quit
 
 
-  Application Developers (using the packet capture library in other apps)
+Headless one-shot
+-----------------
 
-    If you are a Java developer interested in using jpcap to capture 
-    packets in an application you are developing, you need to do the 
-    following: 
-
-      o In your Java CLASSPATH, include jars/net.sourceforge.jpcap-x.yy.zz.jar
-        plus all jars found in thirdParty/jars.
-
-      o Native bindings to libpcap are provided precompiled for intel Linux.
-        The Java wrapper shared object is 
-          src/java/net/sourceforge/jpcap/capture/libjpcap.so
-
-        This file needs to be included in your LD_LIBRARY_PATH.
-        If you are working on another platform, you'll need to 
-        build the jpcap library and shared object yourself, see below.
-
-      o All capture operations are performed using methods from the class
-          net.sourceforge.jpcap.capture.PacketCapture
-
-      o Javadocs are located in jars/javadoc_net.sourceforge.jpcap-x.yy.zz.jar
-
-      o Examples are provided in the package net.sourceforge.jpcap.tutorial.
-
-      
-    More specific documentation on the jpcap java packages can be found in 
-    src/java/net/sourceforge/jpcap/README.
-
-    If you checked out jpcap from the CVS repository and are looking 
-    for information on building the jpcap library in this tree, 
-    see docs/BUILD.[platform].
-
-    Additional information can be found on sourceforge.net, where 
-    the project was actively developed since 2001.
-
-      http://www.sf.net/projects/jpcap
-
-    More recent development, more active development is occurring on github:
-
-      http://www.github.com/jpcap
+    sudo java -cp "$CP" net.sourceforge.jpcap.tutorial.sniff.Sniff en0 10
+    sudo java -cp "$CP" net.sourceforge.jpcap.tutorial.sniff.Sniff en0 50 "tcp port 443"
 
 
-  Contributing
+No-root option (Linux)
+----------------------
 
-    If you are using jpcap and have made enhancements or bug fixes to the 
-    core capture library, please contribute them.
+    sudo setcap cap_net_raw,cap_net_admin=eip "$(readlink -f $(which java))"
 
-    You can contribute by forking the project and sending a pull request
-    to http://www.github.com/jpcap.
+Run as the original user afterwards. Re-run setcap if you replace
+the JRE binary.
 
-    If you've developed an application using jpcap, we're interested in 
-    hearing about it at jpcapadmin at ultrametrics dot net.
 
-    Happy Hacking!
+No-root option (macOS)
+----------------------
 
+    sudo dseditgroup -o edit -a $USER -t user access_bpf
+    # log out / back in for the group change to take effect
+
+
+Simulator mode (no root, no libpcap)
+------------------------------------
+
+Flip `net.sourceforge.jpcap.simulator=true` in
+`src/main/resources/tool.properties`, rebuild, and CaptureTool will
+synthesise traffic instead of opening a real device. Handy for
+demoing the GUI without privileges.
+
+
+Using as a library
+------------------
+
+    import net.sourceforge.jpcap.capture.PacketCapture;
+    import net.sourceforge.jpcap.net.Packet;
+
+    PacketCapture pcap = new PacketCapture();
+    String dev = pcap.findDevice();
+    pcap.open(dev, true);
+    pcap.setFilter("tcp port 80", true);
+    pcap.addPacketListener(p -> System.out.println(p));
+    pcap.capture(100);
+    pcap.close();
+
+Examples are under `net.sourceforge.jpcap.tutorial.example1` ...
+`example15`, and `tutorial.sniffer.Sniffer`.
+
+
+License
+-------
+
+Mozilla Public License 1.1 (https://www.mozilla.org/MPL/MPL-1.1.txt),
+unchanged from upstream.
