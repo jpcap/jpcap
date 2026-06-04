@@ -19,7 +19,7 @@ public class IPProtocol implements IPProtocols
    * @return a message describing the significance of the IP protocol.
    */
   public static String getDescription(int code) {
-    Integer c = new Integer(code);
+    Integer c = Integer.valueOf(code);
     if(messages.containsKey(c)) 
       return (String)messages.get(c);
     else 
@@ -32,33 +32,33 @@ public class IPProtocol implements IPProtocols
   //jdk1.5: private static HashMap <Integer, String> messages = new HashMap<Integer, String>();
   private static HashMap messages = new HashMap();
   static {
-    messages.put(new Integer(IP), "Dummy protocol for TCP"); 
-    messages.put(new Integer(HOPOPTS), "IPv6 Hop-by-Hop options"); 
-    messages.put(new Integer(ICMP), "Internet Control Message Protocol"); 
-    messages.put(new Integer(IGMP), "Internet Group Management Protocol");
-    messages.put(new Integer(IPIP), "IPIP tunnels"); 
-    messages.put(new Integer(TCP), "Transmission Control Protocol"); 
-    messages.put(new Integer(EGP), "Exterior Gateway Protocol"); 
-    messages.put(new Integer(PUP), "PUP protocol"); 
-    messages.put(new Integer(UDP), "User Datagram Protocol"); 
-    messages.put(new Integer(IDP), "XNS IDP protocol"); 
-    messages.put(new Integer(TP), "SO Transport Protocol Class 4"); 
-    messages.put(new Integer(IPV6), "IPv6 header"); 
-    messages.put(new Integer(ROUTING), "IPv6 routing header"); 
-    messages.put(new Integer(FRAGMENT), "IPv6 fragmentation header"); 
-    messages.put(new Integer(RSVP), "Reservation Protocol"); 
-    messages.put(new Integer(GRE), "General Routing Encapsulation"); 
-    messages.put(new Integer(ESP), "encapsulating security payload"); 
-    messages.put(new Integer(AH), "authentication header"); 
-    messages.put(new Integer(ICMPV6), "ICMPv6"); 
-    messages.put(new Integer(NONE), "IPv6 no next header"); 
-    messages.put(new Integer(DSTOPTS), "IPv6 destination options"); 
-    messages.put(new Integer(MTP), "Multicast Transport Protocol"); 
-    messages.put(new Integer(ENCAP), "Encapsulation Header"); 
-    messages.put(new Integer(PIM), "Protocol Independent Multicast"); 
-    messages.put(new Integer(COMP), "Compression Header Protocol"); 
-    messages.put(new Integer(RAW), "Raw IP Packet"); 
-    messages.put(new Integer(INVALID), "INVALID IP"); 
+    messages.put(Integer.valueOf(IP), "Dummy protocol for TCP"); 
+    messages.put(Integer.valueOf(HOPOPTS), "IPv6 Hop-by-Hop options"); 
+    messages.put(Integer.valueOf(ICMP), "Internet Control Message Protocol"); 
+    messages.put(Integer.valueOf(IGMP), "Internet Group Management Protocol");
+    messages.put(Integer.valueOf(IPIP), "IPIP tunnels"); 
+    messages.put(Integer.valueOf(TCP), "Transmission Control Protocol"); 
+    messages.put(Integer.valueOf(EGP), "Exterior Gateway Protocol"); 
+    messages.put(Integer.valueOf(PUP), "PUP protocol"); 
+    messages.put(Integer.valueOf(UDP), "User Datagram Protocol"); 
+    messages.put(Integer.valueOf(IDP), "XNS IDP protocol"); 
+    messages.put(Integer.valueOf(TP), "SO Transport Protocol Class 4"); 
+    messages.put(Integer.valueOf(IPV6), "IPv6 header"); 
+    messages.put(Integer.valueOf(ROUTING), "IPv6 routing header"); 
+    messages.put(Integer.valueOf(FRAGMENT), "IPv6 fragmentation header"); 
+    messages.put(Integer.valueOf(RSVP), "Reservation Protocol"); 
+    messages.put(Integer.valueOf(GRE), "General Routing Encapsulation"); 
+    messages.put(Integer.valueOf(ESP), "encapsulating security payload"); 
+    messages.put(Integer.valueOf(AH), "authentication header"); 
+    messages.put(Integer.valueOf(ICMPV6), "ICMPv6"); 
+    messages.put(Integer.valueOf(NONE), "IPv6 no next header"); 
+    messages.put(Integer.valueOf(DSTOPTS), "IPv6 destination options"); 
+    messages.put(Integer.valueOf(MTP), "Multicast Transport Protocol"); 
+    messages.put(Integer.valueOf(ENCAP), "Encapsulation Header"); 
+    messages.put(Integer.valueOf(PIM), "Protocol Independent Multicast"); 
+    messages.put(Integer.valueOf(COMP), "Compression Header Protocol"); 
+    messages.put(Integer.valueOf(RAW), "Raw IP Packet"); 
+    messages.put(Integer.valueOf(INVALID), "INVALID IP"); 
   }
 
   /**

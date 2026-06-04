@@ -19,7 +19,7 @@ public class IGMPMessage implements IGMPMessages
    * @return a message describing the significance of the IGMP code.
    */
   public static String getDescription(int code) {
-    Integer c = new Integer(code);
+    Integer c = Integer.valueOf(code);
     if(messages.containsKey(c)) 
       return (String)messages.get(c);
     else 
@@ -32,10 +32,10 @@ public class IGMPMessage implements IGMPMessages
   //jdk1.5: private static HashMap <Integer, String> messages = new HashMap<Integer, String>();
   private static HashMap messages = new HashMap();
   static {
-    messages.put(new Integer(LEAVE), "leave group");
-    messages.put(new Integer(V1_REPORT), "v1 membership report");
-    messages.put(new Integer(V2_REPORT), "v2 membership report");
-    messages.put(new Integer(QUERY), "membership query");
+    messages.put(Integer.valueOf(LEAVE), "leave group");
+    messages.put(Integer.valueOf(V1_REPORT), "v1 membership report");
+    messages.put(Integer.valueOf(V2_REPORT), "v2 membership report");
+    messages.put(Integer.valueOf(QUERY), "membership query");
   }
 }
 

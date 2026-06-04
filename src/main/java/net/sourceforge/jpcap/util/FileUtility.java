@@ -25,7 +25,7 @@ public class FileUtility
     String tmp;
 
     File f = new File(filename);
-    char[] readIn = new char[(new Long(f.length())).intValue()];
+    char[] readIn = new char[(Long.valueOf(f.length())).intValue()];
 
     BufferedReader in = new BufferedReader(new FileReader(f));
 

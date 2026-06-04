@@ -12,9 +12,8 @@
 
   <name>jpcap</name>
   <description>
-    Java classes for network packet capture. Modernised fork of the original
-    jpcap (Patrick Charles &amp; Jonas Lehmann, 2001-2004). Native capture is
-    delegated to Pcap4J; the original libpcap JNI binding has been removed.
+    Java library for network packet capture. Native capture is delegated to
+    Pcap4J; no direct libpcap JNI binding is required.
   </description>
   <url>https://github.com/jpcap/jpcap</url>
 
