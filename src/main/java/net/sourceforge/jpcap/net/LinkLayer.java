@@ -100,7 +100,7 @@ public class LinkLayer implements LinkLayers
    * @return a description of the link-layer type.
    */
   public static String getDescription(int code) {
-    Integer c = new Integer(code);
+    Integer c = Integer.valueOf(code);
     if(descriptions.containsKey(c)) 
       return (String)descriptions.get(c);
     else 
@@ -113,27 +113,27 @@ public class LinkLayer implements LinkLayers
   //jdk1.5: private static HashMap <Integer, String> descriptions = new HashMap<Integer, String>();
   private static HashMap descriptions = new HashMap();
   static {
-    descriptions.put(new Integer(NULL), "no link-layer encapsulation");
-    descriptions.put(new Integer(EN10MB), "10/100Mb ethernet");
-    descriptions.put(new Integer(EN3MB), "3Mb experimental ethernet");
-    descriptions.put(new Integer(AX25), "AX.25 amateur radio");
-    descriptions.put(new Integer(PRONET), "proteon pronet token ring");
-    descriptions.put(new Integer(CHAOS), "chaos");
-    descriptions.put(new Integer(IEEE802), "IEEE802 network");
-    descriptions.put(new Integer(ARCNET), "ARCNET");
-    descriptions.put(new Integer(SLIP), "serial line IP");
-    descriptions.put(new Integer(PPP), "point-to-point protocol");
-    descriptions.put(new Integer(FDDI), "FDDI");
-    descriptions.put(new Integer(ATM_RFC1483), "LLC/SNAP encapsulated ATM");
-    descriptions.put(new Integer(RAW), "raw IP");
-    descriptions.put(new Integer(SLIP_BSDOS), "BSD SLIP");
-    descriptions.put(new Integer(PPP_BSDOS), "BSD PPP");
-    descriptions.put(new Integer(ATM_CLIP), "IP over ATM");
-    descriptions.put(new Integer(PPP_SERIAL), "PPP over HDLC");
-    descriptions.put(new Integer(CHDLC), "Cisco HDLC");
-    descriptions.put(new Integer(IEEE802_11), "802.11 wireless");
-    descriptions.put(new Integer(LOOP), "OpenBSD loopback");
-    descriptions.put(new Integer(LINUX_SLL), "Linux cooked sockets");
-    descriptions.put(new Integer(UNKNOWN), "unknown link-layer type");
+    descriptions.put(Integer.valueOf(NULL), "no link-layer encapsulation");
+    descriptions.put(Integer.valueOf(EN10MB), "10/100Mb ethernet");
+    descriptions.put(Integer.valueOf(EN3MB), "3Mb experimental ethernet");
+    descriptions.put(Integer.valueOf(AX25), "AX.25 amateur radio");
+    descriptions.put(Integer.valueOf(PRONET), "proteon pronet token ring");
+    descriptions.put(Integer.valueOf(CHAOS), "chaos");
+    descriptions.put(Integer.valueOf(IEEE802), "IEEE802 network");
+    descriptions.put(Integer.valueOf(ARCNET), "ARCNET");
+    descriptions.put(Integer.valueOf(SLIP), "serial line IP");
+    descriptions.put(Integer.valueOf(PPP), "point-to-point protocol");
+    descriptions.put(Integer.valueOf(FDDI), "FDDI");
+    descriptions.put(Integer.valueOf(ATM_RFC1483), "LLC/SNAP encapsulated ATM");
+    descriptions.put(Integer.valueOf(RAW), "raw IP");
+    descriptions.put(Integer.valueOf(SLIP_BSDOS), "BSD SLIP");
+    descriptions.put(Integer.valueOf(PPP_BSDOS), "BSD PPP");
+    descriptions.put(Integer.valueOf(ATM_CLIP), "IP over ATM");
+    descriptions.put(Integer.valueOf(PPP_SERIAL), "PPP over HDLC");
+    descriptions.put(Integer.valueOf(CHDLC), "Cisco HDLC");
+    descriptions.put(Integer.valueOf(IEEE802_11), "802.11 wireless");
+    descriptions.put(Integer.valueOf(LOOP), "OpenBSD loopback");
+    descriptions.put(Integer.valueOf(LINUX_SLL), "Linux cooked sockets");
+    descriptions.put(Integer.valueOf(UNKNOWN), "unknown link-layer type");
   }
 }
