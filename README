@@ -72,7 +72,7 @@ A Swing window opens (network graph) and the terminal shows a
 
 Headless one-shot
 -----------------
-
+    
     sudo java -cp "$CP" net.sourceforge.jpcap.tutorial.sniff.Sniff en0 10
     sudo java -cp "$CP" net.sourceforge.jpcap.tutorial.sniff.Sniff en0 50 "tcp port 443"
 
@@ -134,6 +134,11 @@ Using as a library
 
 Examples are under `net.sourceforge.jpcap.tutorial.example1` ...
 `example15`, and `tutorial.sniffer.Sniffer`.
+
+
+    For building the jpcap library on Windows, the MinGW environment is 
+    recommended. Also, the Windows port of libpcap, known as npcap, is 
+    required. For more information, have a look at docs/BUILD.windows.
 
 
 License

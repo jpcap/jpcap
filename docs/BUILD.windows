@@ -20,8 +20,8 @@ $Id: BUILD.windows,v 1.5 2004/10/01 23:41:06 pcharles Exp $
       o Download and install MinGW and MSYS, if you don't already have it:
           http://www.mingw.org/download.shtml 
 
-      o Download and install the WinPcap developer's pack and auto-installer:
-          http://winpcap.polito.it/install/default.htm
+      o Download and install the Npcap developer's auto-installer:
+          https://npcap.com/#download
  
       o Download the latest jpcap source tarball:
           http://sourceforge.net/projects/jpcap
@@ -48,4 +48,21 @@ $Id: BUILD.windows,v 1.5 2004/10/01 23:41:06 pcharles Exp $
 
     This procedure was tested using MinGW 3.1.0-1, MSYS-1.0.10,
     Sun's JDK1.4.2_04 and WinPcap v. 3.1.
+Note: To use jpcap with maven use the below code:
+
+    <repositories>
+        <repository>
+            <id>top-q-public</id>
+            <url>http://maven.top-q.co.il/content/repositories/public/</url>
+        </repository>
+    </repositories>
+
+
+    <dependencies>
+        <dependency>
+            <groupId>net.sourceforge.jpcap</groupId>
+            <artifactId>net-sourcedorge-jpcap</artifactId>
+            <version>0.01.16</version>
+        </dependency>
+    </dependencies>
 
