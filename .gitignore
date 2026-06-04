@@ -1,1 +1,12 @@
+target/
 *.class
+*.jar
+*.war
+*.iml
+.idea/
+.vscode/
+.classpath
+.project
+.settings/
+.DS_Store
+hs_err_pid*
