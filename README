@@ -1,43 +1,5 @@
-jpcap (modernised fork)
+JPCAP
 =======================
-
-This is a modernised fork of the original **jpcap** library by
-Patrick Charles & Jonas Lehmann (https://github.com/jpcap/jpcap,
-SourceForge, 2001-2004). Upstream development stopped over two
-decades ago; this fork brings the code forward so it builds and runs
-on a current JDK without touching any of the C/JNI machinery.
-
-Upstream:  https://github.com/jpcap/jpcap (original, unmaintained)
-This fork: https://github.com/kevoroid/jpcap
-
-
-What changed vs upstream
-------------------------
-
-  * Builds with Apache Maven (with bundled wrapper) targeting JDK 21.
-  * Native libpcap binding rewritten on top of Pcap4J + JNA 5.14 -- no
-    libjpcap.{so,jnilib,dll} JNI library to compile, and Apple Silicon
-    is supported out of the box.
-  * Maven layout: src/main/java, src/test/java, src/main/resources.
-  * JUnit 3 TestCase suites migrated to JUnit 5 (Jupiter); all 47
-    tests pass.
-  * Vendor jars (com.fooware.util.CommandLine, net.ultrametrics.console
-    .TestConsole) replaced with minimal in-project equivalents in
-    net.sourceforge.jpcap.client.
-  * Swing visualisation (CaptureTool) reworked: PacketVisualizationCanvas
-    is now a JPanel that paints through paintComponent(Graphics), so
-    the host/edge layout reflows on window resize. Default canvas
-    bumped to 1280x800; renderers anti-aliased.
-  * Reverse DNS for hosts: shared 4-thread daemon pool, results cached
-    per-IP, repaint triggered when a name resolves.
-  * Bugs fixed: IPPacket.onesCompSum off-by-one (checksums now validate),
-    ArrayHelper.extract* bounds checks restored, PropertyHelper falls
-    back to the classpath instead of System.exit(1) when properties
-    aren't on disk, CommandLine REPL no longer blocks GUI startup.
-  * client.Settings / simulator.Settings have code-level defaults;
-    properties files are optional overrides, not mandatory.
-  * Cleanups across ~90 files: CVS metadata, _rcsid fields,
-    StringBuffer, raw collections.
 
 
 Build and run
